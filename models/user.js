@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -11,7 +10,8 @@ const UserSchema = new Schema({
   created_on: Date,
   provider: String,
   last_login: Date,
-  login_count: Number,  
+  login_count: Number,
+  foodtypes: [{ type: Schema.Types.ObjectId, ref:'Foodtype' }] 
 });
 
 UserSchema.methods.incrementLoginCount = function() {

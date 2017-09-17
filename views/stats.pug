@@ -1,0 +1,7 @@
+extends layout.pug
+
+block content
+  h1 Meals
+  ul
+    each meal in meals
+      li #{meal.timestamp.toLocaleDateString()} #{meal.timestamp.toLocaleTimeString()} - #{meal.name} - #{meal.packageportion} package

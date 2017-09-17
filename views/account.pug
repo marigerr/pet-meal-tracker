@@ -1,8 +1,7 @@
 extends layout.pug
 
 block content
-  h1 You are logged in.
-  p.lead Account info
+  h1 Account info
   img(src=user.photo style='width:150px; border-radius:25%')
   h3= user.username
   p Login provider: #{user.provider.toUpperCase()}

@@ -5,6 +5,7 @@ const session = require('express-session')
 const path = require('path');
 const User = require('./models/user.js');
 const Meal = require('./models/meal.js');
+const Foodtype = require('./models/foodtype.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const auth = require('./auth.js');
@@ -20,10 +21,10 @@ const app = express();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+app.use('/assets', express.static(__dirname + '/assets'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
+app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true, cookie: { maxAge: 2592000000 } }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -37,57 +38,134 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.get('/', (req, res) => { res.render('index', { title: "Tracker App" }) });
+app.get('/', (req, res) => {
+  if (req.session.passport && req.session.passport.user) {
+    User.findById(req.session.passport.user, function (err, user) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render('index', { isAuthenticated: true, title: "Tracker App" })
+      }
+    });
+  } else {
+    res.render('index', { isAuthenticated: false, title: "Tracker App" })
+  }
+});
 
 app.get('/auth/github',
   passport.authenticate('github'),
-  function (req, res) { });
+  (req, res) => { });
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
-  function (req, res) {
+  (req, res) => {
     res.redirect('/track');
   });
 
-app.get('/account', ensureAuthenticated, function (req, res) {
+app.get('/account', ensureAuthenticated, (req, res) => {
+  console.log(req.session.passport);
   User.findById(req.session.passport.user, function (err, user) {
     if (err) {
       console.log(err);
     } else {
-      res.render('account', { user: user, title: "Account" });
+      res.render('account', { user: user, isAuthenticated: true, title: "Account" });
     }
   });
 });
 
-app.get('/logout', function (req, res) {
+app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
-app.get('/track', ensureAuthenticated, function (req, res){
-  res.render('track', { title: "Tracker" });  
-})
+app.get('/track', ensureAuthenticated, (req, res) => {
+  User.findOne({ _id: req.session.passport.user })
+    .populate( 'foodtypes')
+    .exec((err, user) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(user);
+        res.render('track', { isAuthenticated: true, user: user, title: "Tracker" });
+      }
+    });
+});
 
-app.post('/track', ensureAuthenticated, function (req, res){
-  User.findById(req.session.passport.user, function (err, user) {
+app.post('/track', ensureAuthenticated, (req, res) => {
+  // const amount = JSON.parse(req.body.amount);
+
+  User.findOne({ _id: req.session.passport.user })
+  .populate( 'foodtypes')
+  .exec((err, user) => {
     if (err) {
       console.log(err);
     } else {
       meal = new Meal({
         name: req.body.name,
-        quantity: req.body.quantity,
+        packageportion: req.body.amount,
+        // quantity: amount.quantity,
+        // daily: amount.daily,
         oauthID: user.oauthID,
         timestamp: new Date()
       });
       meal.save(function (err) {
         if (err) {
-          console.log(err);  
+          console.log(err);
         } else {
-          res.render('track', {title: "Tracker"});
+          res.render('track', { isAuthenticated: true, user: user, title: "Tracker" });
         }
-      });  
-    } 
-  });   
-})
+      });
+    }
+  });
+});
+
+app.get('/stats', ensureAuthenticated, (req, res) => {
+  User.findById(req.session.passport.user, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      Meal.find({
+        oauthID: user.oauthID
+      })
+        .sort({ timestamp: 'asc' })
+        // .select({ _id: 0, name: 1, quantity: 1, timestamp: 1 })
+        .exec((err, meals) => {
+          res.render('stats', { isAuthenticated: true, title: "Tracker-Stats", meals: meals });
+        })
+    }
+  });
+});
+
+app.get('/addfood', ensureAuthenticated, (req, res) => {
+  res.render('addfood', { isAuthenticated: true, title: "Tracker-Add Food" });
+});
+
+app.post('/addfood', ensureAuthenticated, (req, res) => {
+
+  User.findById(req.session.passport.user, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      food = new Foodtype({
+        _id: new mongoose.Types.ObjectId(),
+        oauthID: user.oauthID,
+        name: req.body.name,
+        volume: req.body.volume,
+        packageDailyEquivalent: req.body.packageDailyEquivalent,
+      });
+      user.foodtypes.push(food);
+      user.save((err) => {
+        console.log(err)
+      })
+      food.save(function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render('addfood', { isAuthenticated: true, title: "Tracker-Add Food" });
+        }
+      });
+    }
+  });
+});
 
 auth(app, db);
 

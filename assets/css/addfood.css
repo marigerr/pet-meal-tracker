@@ -1,0 +1,17 @@
+.flex-inputs {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+}
+
+input[type=text] {
+  width: 200px;
+}
+
+input[type=submit] {
+  background-color: #625098;
+  color: #ffffff;
+  border-color: #625098;
+  border-radius: 3px;
+  width: 100px;
+}
