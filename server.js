@@ -62,7 +62,6 @@ app.get('/auth/github/callback',
   });
 
 app.get('/account', ensureAuthenticated, (req, res) => {
-  console.log(req.session.passport);
   User.findById(req.session.passport.user, function (err, user) {
     if (err) {
       console.log(err);
@@ -84,7 +83,6 @@ app.get('/track', ensureAuthenticated, (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(user);
         res.render('track', { isAuthenticated: true, user: user, title: "Tracker" });
       }
     });
@@ -127,7 +125,6 @@ app.get('/stats', ensureAuthenticated, (req, res) => {
         oauthID: user.oauthID
       })
         .sort({ timestamp: 'asc' })
-        // .select({ _id: 0, name: 1, quantity: 1, timestamp: 1 })
         .exec((err, meals) => {
           res.render('stats', { isAuthenticated: true, title: "Tracker-Stats", meals: meals });
         })
