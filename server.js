@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session')
 const path = require('path');
 const User = require('./models/user.js');
+const Meal = require('./models/meal.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const auth = require('./auth.js');
@@ -36,16 +37,7 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.get('/', (req, res) => { res.render('index', { title: "Tracker App"})});
-app.get('/account', ensureAuthenticated, function (req, res) {
-  User.findById(req.session.passport.user, function (err, user) {
-    if (err) {
-      console.log(err);  
-    } else {
-      res.render('account', { user: user, title: "Tracker - Account" });
-    }
-  });
-});
+app.get('/', (req, res) => { res.render('index', { title: "Tracker App" }) });
 
 app.get('/auth/github',
   passport.authenticate('github'),
@@ -53,15 +45,51 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function (req, res) {
-    res.redirect('/account');
+    res.redirect('/track');
   });
+
+app.get('/account', ensureAuthenticated, function (req, res) {
+  User.findById(req.session.passport.user, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('account', { user: user, title: "Account" });
+    }
+  });
+});
 
 app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });
 
-auth(app,db);
+app.get('/track', ensureAuthenticated, function (req, res){
+  res.render('track', { title: "Tracker" });  
+})
+
+app.post('/track', ensureAuthenticated, function (req, res){
+  User.findById(req.session.passport.user, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      meal = new Meal({
+        name: req.body.name,
+        quantity: req.body.quantity,
+        oauthID: user.oauthID,
+        timestamp: new Date()
+      });
+      meal.save(function (err) {
+        if (err) {
+          console.log(err);  
+        } else {
+          res.render('track', {title: "Tracker"});
+        }
+      });  
+    } 
+  });   
+})
+
+auth(app, db);
 
 app.listen(process.env.PORT, () => {
   console.log("Listening on port " + process.env.PORT);

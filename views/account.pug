@@ -1,17 +1,11 @@
-html
-  head
-    title= title
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel="icon" href="../favicon.ico")
-  body
-  .container
-    a(href="/") Home   
-    a(href="/logout") Logout
-    h1 You are logged in.
-    p.lead Account info
-    img(src=user.photo style='width:150px; border-radius:25%')
-    h3= user.username
-    p Login provider: #{user.provider.toUpperCase()}
-    p Tracker Account created on: #{user.created_on.toLocaleString()}
-    p Last Login: #{user.last_login.toLocaleString()}
-    p Number of Logins: #{user.login_count}
+extends layout.pug
+
+block content
+  h1 You are logged in.
+  p.lead Account info
+  img(src=user.photo style='width:150px; border-radius:25%')
+  h3= user.username
+  p Login provider: #{user.provider.toUpperCase()}
+  p Tracker Account created on: #{user.created_on.toLocaleString()}
+  p Last Login: #{user.last_login.toLocaleString()}
+  p Number of Logins: #{user.login_count}

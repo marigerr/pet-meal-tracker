@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+  h1 Track Riddlers Meals
+  form(action='/track', method='post')  
+    select(name="name")
+      option(value="bozita") Bozita
+      option(value="rc-ageing") RC Ageing 
+    br 
+    select(name="quantity")  
+      option(value="0.25") 0.25
+      option(value="0.30") 0.30
+      option(value="0.50") 0.50 
+    br
+    input(type='submit' value='Submit') 
