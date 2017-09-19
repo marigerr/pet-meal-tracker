@@ -1,11 +1,16 @@
 require('dotenv').config()
 const express = require('express');
+const router = express.Router()
 const bodyParser = require('body-parser');
 const session = require('express-session')
 const path = require('path');
 const User = require('./models/user.js');
 const Meal = require('./models/meal.js');
 const Foodtype = require('./models/foodtype.js');
+const accountController = require('./controllers/accountController.js');
+const trackController = require('./controllers/trackController.js');
+const statsController = require('./controllers/statsController.js');
+const addfoodController = require('./controllers/addfoodController.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const auth = require('./auth.js');
@@ -60,107 +65,24 @@ app.get('/auth/github/callback',
   (req, res) => {
     res.redirect('/track');
   });
-
-app.get('/account', ensureAuthenticated, (req, res) => {
-  User.findById(req.session.passport.user, function (err, user) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('account', { user: user, isAuthenticated: true, title: "Account" });
-    }
-  });
-});
-
 app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
-app.get('/track', ensureAuthenticated, (req, res) => {
-  User.findOne({ _id: req.session.passport.user })
-    .populate( 'foodtypes')
-    .exec((err, user) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render('track', { isAuthenticated: true, user: user, title: "Pet Meal Tracker" });
-      }
-    });
-});
+router.route('/account')
+  .get(ensureAuthenticated, accountController.getAccount);
+router.route('/track')
+  .get(ensureAuthenticated, trackController.getTrack)
+  .post(ensureAuthenticated, trackController.postTrack);
+router.route('/stats')
+  .get(ensureAuthenticated, statsController.getStats);
+router.route('/addfood')
+  .get(ensureAuthenticated, addfoodController.getAddfood)
+  .post(ensureAuthenticated, addfoodController.postAddfood);
 
-app.post('/track', ensureAuthenticated, (req, res) => {
 
-  User.findOne({ _id: req.session.passport.user })
-  .populate( 'foodtypes')
-  .exec((err, user) => {
-    if (err) {
-      console.log(err);
-    } else {
-      meal = new Meal({
-        name: req.body.name,
-        packageportion: req.body.amount,
-        openednewpackage: req.body.openednewpackage,
-        oauthID: user.oauthID,
-        timestamp: new Date()
-      });
-      meal.save(function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render('track', { isAuthenticated: true, user: user, title: "Pet Meal Tracker" });
-        }
-      });
-    }
-  });
-});
-
-app.get('/stats', ensureAuthenticated, (req, res) => {
-  User.findById(req.session.passport.user, function (err, user) {
-    if (err) {
-      console.log(err);
-    } else {
-      Meal.find({
-        oauthID: user.oauthID
-      })
-        .sort({ timestamp: 'asc' })
-        .exec((err, meals) => {
-          res.render('stats', { isAuthenticated: true, title: "Tracker-Stats", meals: meals });
-        })
-    }
-  });
-});
-
-app.get('/addfood', ensureAuthenticated, (req, res) => {
-  res.render('addfood', { isAuthenticated: true, title: "Tracker-Add Food" });
-});
-
-app.post('/addfood', ensureAuthenticated, (req, res) => {
-
-  User.findById(req.session.passport.user, function (err, user) {
-    if (err) {
-      console.log(err);
-    } else {
-      food = new Foodtype({
-        _id: new mongoose.Types.ObjectId(),
-        oauthID: user.oauthID,
-        name: req.body.name,
-        volume: req.body.volume,
-        packageDailyEquivalent: req.body.packageDailyEquivalent,
-      });
-      user.foodtypes.push(food);
-      user.save((err) => {
-        console.log(err)
-      })
-      food.save(function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render('addfood', { isAuthenticated: true, title: "Tracker-Add Food" });
-        }
-      });
-    }
-  });
-});
+app.use('/', router);
 
 auth(app, db);
 
