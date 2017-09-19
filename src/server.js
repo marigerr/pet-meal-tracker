@@ -1,8 +1,7 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
-const router = express.Router()
 const bodyParser = require('body-parser');
-const session = require('express-session')
+const session = require('express-session');
 const path = require('path');
 const User = require('./models/user.js');
 const Meal = require('./models/meal.js');
@@ -22,11 +21,12 @@ mongoose.connect(process.env.DATABASE, {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+const router = express.Router();
 const app = express();
 
-app.set('views', __dirname + '/views');
+app.set('views', `${__dirname}/views`);
 app.set('view engine', 'pug');
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/public', express.static(`${__dirname}/public`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true, cookie: { maxAge: 2592000000 } }));
@@ -34,11 +34,11 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitia
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
   done(null, user._id);
 });
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
     if (!err) done(null, user);
     else done(err, null);
   });
@@ -46,15 +46,15 @@ passport.deserializeUser(function (id, done) {
 
 app.get('/', (req, res) => {
   if (req.session.passport && req.session.passport.user) {
-    User.findById(req.session.passport.user, function (err, user) {
+    User.findById(req.session.passport.user, (err, user) => {
       if (err) {
         console.log(err);
       } else {
-        res.render('index', { isAuthenticated: true, title: "Pet Meal Tracker" })
+        res.render('index', { isAuthenticated: true, title: 'Pet Meal Tracker' });
       }
     });
   } else {
-    res.render('index', { isAuthenticated: false, title: "Pet Meal Tracker" })
+    res.render('index', { isAuthenticated: false, title: 'Pet Meal Tracker' });
   }
 });
 
@@ -88,7 +88,7 @@ app.use('/', router);
 auth(app, db);
 
 app.listen(process.env.PORT, () => {
-  console.log("Listening on port " + process.env.PORT);
+  console.log(`Listening on port ${process.env.PORT}`);
 });
 
 function ensureAuthenticated(req, res, next) {

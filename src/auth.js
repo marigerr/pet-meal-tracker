@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const passport = require('passport');
 const GithubStrategy = require('passport-github').Strategy;
 const User = require('./models/user.js');

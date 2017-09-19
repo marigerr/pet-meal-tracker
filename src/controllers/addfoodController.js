@@ -4,15 +4,15 @@ const User = require('../models/user.js');
 const mongoose = require('mongoose');
 
 exports.getAddfood = (req, res) => {
-  res.render('addfood', { isAuthenticated: true, title: "Tracker-Add Food" }); 
-}
+  res.render('addfood', { isAuthenticated: true, title: 'Tracker-Add Food' });
+};
 
 exports.postAddfood = (req, res) => {
-  User.findById(req.session.passport.user, function (err, user) {
+  User.findById(req.session.passport.user, (err, user) => {
     if (err) {
       console.log(err);
     } else {
-      food = new Foodtype({
+      const food = new Foodtype({
         _id: new mongoose.Types.ObjectId(),
         oauthID: user.oauthID,
         name: req.body.name,
@@ -20,16 +20,16 @@ exports.postAddfood = (req, res) => {
         packageDailyEquivalent: req.body.packageDailyEquivalent,
       });
       user.foodtypes.push(food);
-      user.save((err) => {
-        console.log(err)
-      })
-      food.save(function (err) {
+      user.save((error) => {
+        console.log(error);
+      });
+      food.save((error) => {
         if (err) {
-          console.log(err);
+          console.log(error);
         } else {
-          res.render('addfood', { isAuthenticated: true, title: "Tracker-Add Food" });
+          res.render('addfood', { isAuthenticated: true, title: 'Tracker-Add Food' });
         }
       });
     }
   });
-}  
+};

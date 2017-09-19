@@ -7,7 +7,7 @@ const MealSchema = new Schema({
   name: String,
   openednewpackage: Boolean,
   packageportion: Number,
-  timestamp: Date
+  timestamp: Date,
 });
 
 module.exports = mongoose.model('Meal', MealSchema);

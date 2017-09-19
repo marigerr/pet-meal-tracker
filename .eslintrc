@@ -11,8 +11,7 @@
   ],
   "env": {
 	    "browser": true,
-	    "node": true,
-	    "webextensions": true
+	    "node": true
   },
   "settings": {
     "import/resolver": {
@@ -27,8 +26,11 @@
     "max-len": ["off"],
     "no-console": "off",
     "react/prop-types": "off",
-    // "no-unused-vars": "off",
-    "class-methods-use-this": "off"
+    "no-underscore-dangle": "off",
+    "no-unused-vars": "off",
+    "class-methods-use-this": "off",
+    "consistent-return":"off",
+    "no-param-reassign": 0
   },
   "plugins": [
     "react"
