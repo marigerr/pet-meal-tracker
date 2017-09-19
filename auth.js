@@ -6,9 +6,12 @@ const User = require('./models/user.js');
 module.exports = function (app, db) {
 
   passport.use(new GithubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.callbackURL
+    // clientID: process.env.GITHUB_CLIENT_ID,
+    // clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    // callbackURL: process.env.callbackURL
+    clientID: process.env.HEROKU_GITHUB_CLIENT_ID,
+    clientSecret: process.env.HEROKU_GITHUB_CLIENT_SECRET,
+    callbackURL: process.env.HEROKU_callbackURL    
   },
     function (accessToken, refreshToken, profile, done) {
       User.findOne({ oauthID: profile.id }, function (err, user) {

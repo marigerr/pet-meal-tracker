@@ -29,7 +29,9 @@ app.set('view engine', 'pug');
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true, cookie: { maxAge: 2592000000 } }));
+// app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true, cookie: { maxAge: 2592000000 } }));
+app.use(session({ secret: process.env.HEROKU_SESSION_SECRET, resave: true, saveUninitialized: true, cookie: { maxAge: 2592000000 } }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
