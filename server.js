@@ -44,11 +44,11 @@ app.get('/', (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.render('index', { isAuthenticated: true, title: "Tracker App" })
+        res.render('index', { isAuthenticated: true, title: "Pet Meal Tracker" })
       }
     });
   } else {
-    res.render('index', { isAuthenticated: false, title: "Tracker App" })
+    res.render('index', { isAuthenticated: false, title: "Pet Meal Tracker" })
   }
 });
 
@@ -83,13 +83,12 @@ app.get('/track', ensureAuthenticated, (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.render('track', { isAuthenticated: true, user: user, title: "Tracker" });
+        res.render('track', { isAuthenticated: true, user: user, title: "Pet Meal Tracker" });
       }
     });
 });
 
 app.post('/track', ensureAuthenticated, (req, res) => {
-  // const amount = JSON.parse(req.body.amount);
 
   User.findOne({ _id: req.session.passport.user })
   .populate( 'foodtypes')
@@ -100,8 +99,7 @@ app.post('/track', ensureAuthenticated, (req, res) => {
       meal = new Meal({
         name: req.body.name,
         packageportion: req.body.amount,
-        // quantity: amount.quantity,
-        // daily: amount.daily,
+        openednewpackage: req.body.openednewpackage,
         oauthID: user.oauthID,
         timestamp: new Date()
       });
@@ -109,7 +107,7 @@ app.post('/track', ensureAuthenticated, (req, res) => {
         if (err) {
           console.log(err);
         } else {
-          res.render('track', { isAuthenticated: true, user: user, title: "Tracker" });
+          res.render('track', { isAuthenticated: true, user: user, title: "Pet Meal Tracker" });
         }
       });
     }

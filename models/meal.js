@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const MealSchema = new Schema({
   oauthID: String,
   name: String,
-  // quantity: String,
+  openednewpackage: Boolean,
   packageportion: Number,
   timestamp: Date
 });

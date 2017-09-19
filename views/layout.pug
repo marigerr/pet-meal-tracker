@@ -4,18 +4,25 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel="icon" href="../assets/favicon.ico")
     link(rel="stylesheet" href="../assets/css/layout.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.min.css")
     block links
-  
+      
   body
-    nav
-      //- a(href="/") Home   
-      a(href="/track") Track
-      a(href="/stats") Stats
-      a(href="/addfood") Add Food
-      //- a(href="/account") Account
-      if isAuthenticated 
-        a(href="/logout") Logout
-      else
-        a(href="/auth/github") Login via Github
+    nav.navbar(role='navigation', aria-label='main navigation')
+      .navbar-brand
+        a.navbar-item(href="/") Home
+        a.navbar-item(href="/track") Track
+        a.navbar-item(href="/stats") Stats
+        a.navbar-item(href="/addfood") Add Food
+        a.navbar-item(href="/account") Account
+        if isAuthenticated 
+          a.navbar-item(href="/logout") Logout
+        else
+          a.navbar-item(href="/auth/github") Login via Github
+        button.button.navbar-burger
+          span
+          span
+          span
+      
     main
       block content

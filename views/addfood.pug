@@ -5,19 +5,20 @@ block links
 
 
 block content
-  h1 Add New Food 
-  form(action='/addfood', method='post')
-    div(class='flex-inputs')
-      label(id='name') Name/Brand/Flavor
-      input(type='text', name='name', value='')
-    br
-    div(class='flex-inputs')
-      label(id='volume') Volume in grams
-      input(type='text', name='volume', value='')
-    br
-    div(class='flex-inputs')
-      label(id='packageDailyEquivalent') Package portion of daily requirements 
-      input(type='text', name='packageDailyEquivalent', value='')
-    br
-    br
-    input(type='submit', value='Submit')
+  h1.title Add New Food 
+  //- .section
+  .column.is-half
+    form(action='/addfood', method='post')
+      .field
+        label.label(id='name') Name/Brand/Flavor
+        .control
+          input.input(type='text', name='name', value='')
+      .field
+        label.label(id='volume') Volume in grams
+        .control
+          input.input(type='text', name='volume', value='')
+      .field
+        label.label(id='packageDailyEquivalent') Package portion of daily requirements
+        .control 
+          input.input(type='text', name='packageDailyEquivalent', value='')
+      input.button.is-dark(type='submit', value='Submit')
