@@ -19,14 +19,14 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE, {
   useMongoClient: true,
 });
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const app = express();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
-app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true, cookie: { maxAge: 2592000000 } }));
