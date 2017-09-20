@@ -1,0 +1,32 @@
+extends layout.pug
+
+block content
+  h1.title Track Pet Meals
+  if user.foodtypes.length > 0 
+    form(action='/track', method='post')  
+      .field
+        label.label Select Food Type
+        .control
+          .select
+            select(name="name")
+              each food in user.foodtypes
+                option(value=food.name) #{food.name}
+
+      .field
+        label.label Portion
+        .control
+          .select
+            select(name="amount")
+              option(value='0.25') 0.25
+              option(value="0.30") 0.30
+              option(value="0.50") 0.50 
+              option(value="0.50") 0.75 
+              option(value="0.50") 1 
+      .field
+        .control  
+          label.checkbox 
+            input(type='checkbox' name="openednewpackage") 
+            | Opened New Package 
+      input.button.is-dark(type='submit' value='Submit') 
+  else
+    a(href="/addfood") Add Food Types  

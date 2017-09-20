@@ -1,0 +1,20 @@
+extends layout.pug
+
+block content
+  h1.title Account info
+  img(src=user.photo style='width:150px; border-radius:25%')
+  h3 
+    strong Username:  
+    | #{user.username}
+  p 
+    strong Login provider: 
+    | #{user.provider.toUpperCase()}
+  p  
+    strong Pet Meal Tracker Account created on: 
+    | #{user.created_on.toLocaleString()}
+  p 
+    strong Last Login:  
+    | #{user.last_login.toLocaleString()}
+  p 
+    strong Number of Logins: 
+    | #{user.login_count}

@@ -1,0 +1,24 @@
+extends layout.pug
+
+block links
+  link(rel="stylesheet" href="../assets/css/addfood.css")
+
+
+block content
+  h1.title Add New Food 
+  //- .section
+  .column.is-half
+    form(action='/addfood', method='post')
+      .field
+        label.label(id='name') Name/Brand/Flavor
+        .control
+          input.input(type='text', name='name', value='')
+      .field
+        label.label(id='volume') Volume in grams
+        .control
+          input.input(type='text', name='volume', value='')
+      .field
+        label.label(id='packageDailyEquivalent') Package portion of daily requirements
+        .control 
+          input.input(type='text', name='packageDailyEquivalent', value='')
+      input.button.is-dark(type='submit', value='Submit')
