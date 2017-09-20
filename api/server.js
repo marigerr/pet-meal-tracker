@@ -3,16 +3,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
-const User = require('./api/models/user.js');
-const Meal = require('./api/models/meal.js');
-const Foodtype = require('./api/models/foodtype.js');
-const accountController = require('./api/controllers/accountController.js');
-const trackController = require('./api/controllers/trackController.js');
-const statsController = require('./api/controllers/statsController.js');
-const addfoodController = require('./api/controllers/addfoodController.js');
+const User = require('./models/user.js');
+const Meal = require('./models/meal.js');
+const Foodtype = require('./models/foodtype.js');
+const accountController = require('./controllers/accountController.js');
+const trackController = require('./controllers/trackController.js');
+const statsController = require('./controllers/statsController.js');
+const addfoodController = require('./controllers/addfoodController.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const auth = require('./api/auth.js');
+const auth = require('./auth.js');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE, {
@@ -44,19 +44,19 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-app.get('/', (req, res) => {
-  if (req.session.passport && req.session.passport.user) {
-    User.findById(req.session.passport.user, (err, user) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.sendFile('/index.html', { root: __dirname }, { isAuthenticated: true, title: 'Pet Meal Tracker' });
-      }
-    });
-  } else {
-    res.sendFile('index.html', { isAuthenticated: false, title: 'Pet Meal Tracker' });
-  }
-});
+// app.get('/', (req, res) => {
+//   if (req.session.passport && req.session.passport.user) {
+//     User.findById(req.session.passport.user, (err, user) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         res.sendFile('..client/index.html', { root: __dirname }, { isAuthenticated: true, title: 'Pet Meal Tracker' });
+//       }
+//     });
+//   } else {
+//     res.sendFile('index.html', { isAuthenticated: false, title: 'Pet Meal Tracker' });
+//   }
+// });
 
 app.get('/auth/github',
   passport.authenticate('github'),
@@ -71,14 +71,14 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-router.route('/account')
+router.route('api/account')
   .get(ensureAuthenticated, accountController.getAccount);
-router.route('/track')
+router.route('api/track')
   .get(ensureAuthenticated, trackController.getTrack)
   .post(ensureAuthenticated, trackController.postTrack);
-router.route('/stats')
+router.route('api/stats')
   .get(ensureAuthenticated, statsController.getStats);
-router.route('/addfood')
+router.route('api/addfood')
   .get(ensureAuthenticated, addfoodController.getAddfood)
   .post(ensureAuthenticated, addfoodController.postAddfood);
 
