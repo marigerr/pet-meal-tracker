@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node src/server.js",
-    "nodemon": "nodemon dist/server.js",
+    "nodemon": "nodemon api/server.js",
     "build": "webpack --config webpack.config.dev.js",
     "build-production": "node_modules/.bin/webpack -p --config webpack.config.prod.js",
     "server-production": "node_modules/.bin/webpack-dev-server --open --config webpack.config.prod.js",

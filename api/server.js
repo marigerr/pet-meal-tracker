@@ -3,9 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
-const User = require('./models/user.js');
-const Meal = require('./models/meal.js');
-const Foodtype = require('./models/foodtype.js');
 const accountController = require('./controllers/accountController.js');
 const trackController = require('./controllers/trackController.js');
 const statsController = require('./controllers/statsController.js');
@@ -24,25 +21,13 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const router = express.Router();
 const app = express();
 
-// app.set('views', `${__dirname}/views`);
-// app.set('view engine', 'pug');
-app.use(express.static(`${__dirname}/client`));
+app.use(express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true, cookie: { maxAge: 2592000000 } }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    if (!err) done(null, user);
-    else done(err, null);
-  });
-});
 
 // app.get('/', (req, res) => {
 //   if (req.session.passport && req.session.passport.user) {
@@ -58,30 +43,31 @@ passport.deserializeUser((id, done) => {
 //   }
 // });
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../dist/', 'index.html'));
+});
+
 app.get('/auth/github',
   passport.authenticate('github'),
   (req, res) => { });
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('/track');
+    res.json({ message: 'logged in via github' });
   });
 app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
-router.route('api/account')
+router.route('/api/account')
   .get(ensureAuthenticated, accountController.getAccount);
-router.route('api/track')
-  .get(ensureAuthenticated, trackController.getTrack)
+router.route('/api/track')
   .post(ensureAuthenticated, trackController.postTrack);
-router.route('api/stats')
+router.route('/api/stats')
   .get(ensureAuthenticated, statsController.getStats);
-router.route('api/addfood')
-  .get(ensureAuthenticated, addfoodController.getAddfood)
+router.route('/api/addfood')
   .post(ensureAuthenticated, addfoodController.postAddfood);
-
 
 app.use('/', router);
 
@@ -93,7 +79,7 @@ app.listen(process.env.PORT, () => {
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
+  res.json({ message: 'unauthorized' });
 }
 
 module.exports = app;

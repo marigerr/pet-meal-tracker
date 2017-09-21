@@ -1,16 +1,16 @@
 const path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, 'src/client'),
+  context: path.join(__dirname, 'client'),
   entry: [
     './index.js',
   ],
   output: {
-    path: path.join(__dirname, 'dist/client'),
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist/client'),
+    contentBase: path.resolve(__dirname, 'dist'),
     watchOptions: { poll: true },
     compress: true,
     port: 3000,
@@ -42,11 +42,11 @@ module.exports = {
         test: [
           /\.(png|svg|jpg|gif)$/,
           /\.(woff|woff2|eot|ttf|otf)$/,
-          path.join(__dirname, 'src/client/index.html'),
-          path.join(__dirname, 'src/client/favicon.ico'),
-          path.join(__dirname, 'src/api/controllers/*'),
-          path.join(__dirname, 'src/api/models/*'),
-          path.join(__dirname, 'src/server.js'),
+          path.join(__dirname, 'client/index.html'),
+          path.join(__dirname, 'client/favicon.ico'),
+          // path.join(__dirname, 'api/controllers/*'),
+          // path.join(__dirname, 'api/models/*'),
+          // path.join(__dirname, 'api/server.js'),
         ],
         use: [{
           loader: 'file-loader',
@@ -55,18 +55,18 @@ module.exports = {
           },
         }],
       },
-      {
-        test: [
-          path.join(__dirname, 'src/CNAME'),
-          path.join(__dirname, 'src/.surgeignore'),
-        ],
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[path][name]',
-          },
-        }],
-      },
+      // {
+      //   test: [
+      //     path.join(__dirname, 'src/CNAME'),
+      //     path.join(__dirname, 'src/.surgeignore'),
+      //   ],
+      //   use: [{
+      //     loader: 'file-loader',
+      //     options: {
+      //       name: '[path][name]',
+      //     },
+      //   }],
+      // },
     ],
   },
   resolve: {
@@ -74,10 +74,10 @@ module.exports = {
       path.join(__dirname, 'node_modules'),
     ],
     alias: {
-      Client: path.resolve(__dirname, 'src/client/'),
-      Stylesheets: path.resolve(__dirname, './src/client/css/'),
+      Client: path.resolve(__dirname, './client/'),
+      Stylesheets: path.resolve(__dirname, './client/css/'),
+      Components: path.resolve(__dirname, './client/components'),
       // Scripts: path.resolve(__dirname, 'src/scripts/'),
-      // Components: path.resolve(__dirname, './src/components'),
       // Settings: path.resolve(__dirname, './src/components/settings'),
       // Events: path.resolve(__dirname, './src/scripts/events'),
       // Images: path.resolve(__dirname, './src/assets/images/'),

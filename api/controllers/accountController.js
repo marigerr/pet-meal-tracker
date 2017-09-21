@@ -5,7 +5,8 @@ exports.getAccount = (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.render('account', { user, isAuthenticated: true, title: 'Account' });
+      // res.render('account', { user, isAuthenticated: true, title: 'Account' });
+      res.json(user);
     }
   });
 };

@@ -3,9 +3,9 @@ const Foodtype = require('../models/foodtype.js');
 const User = require('../models/user.js');
 const mongoose = require('mongoose');
 
-exports.getAddfood = (req, res) => {
-  res.render('addfood', { isAuthenticated: true, title: 'Tracker-Add Food' });
-};
+// exports.getAddfood = (req, res) => {
+//   res.render('addfood', { isAuthenticated: true, title: 'Tracker-Add Food' });
+// };
 
 exports.postAddfood = (req, res) => {
   User.findById(req.session.passport.user, (err, user) => {
@@ -26,8 +26,10 @@ exports.postAddfood = (req, res) => {
       food.save((error) => {
         if (err) {
           console.log(error);
+          res.send(err);
         } else {
-          res.render('addfood', { isAuthenticated: true, title: 'Tracker-Add Food' });
+          // res.render('addfood', { isAuthenticated: true, title: 'Tracker-Add Food' });
+          res.json({ message: 'New food added' });
         }
       });
     }

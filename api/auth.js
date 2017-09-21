@@ -5,6 +5,16 @@ const User = require('./models/user.js');
 
 module.exports = function (app, db) {
 
+  passport.serializeUser((user, done) => {
+    done(null, user._id);
+  });
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
+      if (!err) done(null, user);
+      else done(err, null);
+    });
+  });
+
   passport.use(new GithubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
