@@ -11,7 +11,8 @@ exports.getStats = (req, res) => {
       })
         .sort({ timestamp: 'asc' })
         .exec((error, meals) => {
-          res.render('stats', { isAuthenticated: true, title: 'Tracker-Stats', meals });
+          // res.render('stats', { isAuthenticated: true, title: 'Tracker-Stats', meals });
+          res.json(meals);
         });
     }
   });
