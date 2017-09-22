@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+  h1.title Github Login  
+  a.button(href='/') Home
+  a.button(href='/api/auth/github') Login
+  if isAuthenticated
+    p Logged In Successfully

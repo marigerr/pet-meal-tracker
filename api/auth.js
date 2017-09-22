@@ -6,9 +6,11 @@ const User = require('./models/user.js');
 module.exports = function (app, db) {
 
   passport.serializeUser((user, done) => {
+    console.log('user serialized');
     done(null, user._id);
   });
   passport.deserializeUser((id, done) => {
+    console.log('deserializing user');
     User.findById(id, (err, user) => {
       if (!err) done(null, user);
       else done(err, null);
@@ -27,6 +29,7 @@ module.exports = function (app, db) {
         }
         if (!err && user !== null) {
           user.incrementLoginCount();
+          user.last_login = new Date()
         } else {
           user = new User({
             oauthID: profile.id,
@@ -44,6 +47,7 @@ module.exports = function (app, db) {
           if (err) {
             console.log(err);  
           } else {
+            console.log(user);
             done(null, user);
           }
         });

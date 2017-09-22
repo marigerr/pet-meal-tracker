@@ -6,6 +6,7 @@ const path = require('path');
 const accountController = require('./controllers/accountController.js');
 const trackController = require('./controllers/trackController.js');
 const statsController = require('./controllers/statsController.js');
+const mealsController = require('./controllers/mealsController.js');
 const addfoodController = require('./controllers/addfoodController.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -21,6 +22,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const router = express.Router();
 const app = express();
 
+app.set('views', `${__dirname}/views`);
+app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,31 +46,48 @@ app.use(passport.session());
 //   }
 // });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../dist/', 'index.html'));
+app.get('/api/auth', (req, res) => {
+  res.render('login');
 });
-
-app.get('/auth/github',
+// why is the message not showing??
+app.get('/api/auth/github',
   passport.authenticate('github'),
-  (req, res) => { });
-app.get('/auth/github/callback',
+  (req, res) => {
+    // res.json({ message: 'logging in via github' });
+  });
+app.get('/api/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
-    res.json({ message: 'logged in via github' });
+    res.render('login', { isAuthenticated: true });
+    // res.sendFile(path.resolve(__dirname, '../dist/', 'index.html'));
+    // res.json({ message: 'logged in via github' });
   });
-app.get('/logout', (req, res) => {
+app.get('/api/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
+
 router.route('/api/account')
   .get(ensureAuthenticated, accountController.getAccount);
 router.route('/api/track')
+  .get(ensureAuthenticated, trackController.getTrack)
   .post(ensureAuthenticated, trackController.postTrack);
+router.route('/api/meals')
+  .get(ensureAuthenticated, mealsController.getMeals)
+  .delete(ensureAuthenticated, mealsController.deleteMeal);
 router.route('/api/stats')
   .get(ensureAuthenticated, statsController.getStats);
 router.route('/api/addfood')
   .post(ensureAuthenticated, addfoodController.postAddfood);
+router.route('*')
+  .get((req, res) => {
+    res.sendFile(path.resolve(__dirname, '../dist/', 'index.html'));
+  });
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../dist/', 'index.html'));
+// });
 
 app.use('/', router);
 
