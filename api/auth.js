@@ -1,4 +1,5 @@
 require('dotenv').config();
+const logger = require('tracer').console();
 const passport = require('passport');
 const GithubStrategy = require('passport-github').Strategy;
 const User = require('./models/user.js');
@@ -6,11 +7,11 @@ const User = require('./models/user.js');
 module.exports = function (app, db) {
 
   passport.serializeUser((user, done) => {
-    console.log('user serialized');
+    logger.log('user serialized');
     done(null, user._id);
   });
   passport.deserializeUser((id, done) => {
-    console.log('deserializing user');
+    logger.log('deserializing user');
     User.findById(id, (err, user) => {
       if (!err) done(null, user);
       else done(err, null);
@@ -25,7 +26,7 @@ module.exports = function (app, db) {
     function (accessToken, refreshToken, profile, done) {
       User.findOne({ oauthID: profile.id }, function (err, user) {
         if (err) {
-          console.log(err);  
+          logger.log(err);  
         }
         if (!err && user !== null) {
           user.incrementLoginCount();
@@ -45,9 +46,9 @@ module.exports = function (app, db) {
         }
         user.save(function (err) {
           if (err) {
-            console.log(err);  
+            logger.log(err);  
           } else {
-            console.log(user);
+            logger.log(user);
             done(null, user);
           }
         });

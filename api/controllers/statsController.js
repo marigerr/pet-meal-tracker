@@ -1,10 +1,11 @@
 const User = require('../models/user.js');
 const Meal = require('../models/meal.js');
+const logger = require('tracer').console();
 
 exports.getStats = (req, res) => {
   User.findById(req.session.passport.user, (err, user) => {
     if (err) {
-      console.log(err);
+      logger.log(err);
     } else {
       Meal.find({
         oauthID: user.oauthID,

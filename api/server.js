@@ -1,4 +1,5 @@
 require('dotenv').config();
+const logger = require('tracer').console();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -36,7 +37,7 @@ app.use(passport.session());
 //   if (req.session.passport && req.session.passport.user) {
 //     User.findById(req.session.passport.user, (err, user) => {
 //       if (err) {
-//         console.log(err);
+//         logger.log(err);
 //       } else {
 //         res.sendFile('..client/index.html', { root: __dirname }, { isAuthenticated: true, title: 'Pet Meal Tracker' });
 //       }
@@ -79,7 +80,8 @@ router.route('/api/meals')
 router.route('/api/stats')
   .get(ensureAuthenticated, statsController.getStats);
 router.route('/api/addfood')
-  .post(ensureAuthenticated, addfoodController.postAddfood);
+  .post(ensureAuthenticated, addfoodController.postAddfood)
+  .delete(ensureAuthenticated, addfoodController.deleteFood);
 router.route('*')
   .get((req, res) => {
     res.sendFile(path.resolve(__dirname, '../dist/', 'index.html'));
@@ -94,7 +96,7 @@ app.use('/', router);
 auth(app, db);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Listening on port ${process.env.PORT}`);
+  logger.log(`Listening on port ${process.env.PORT}`);
 });
 
 function ensureAuthenticated(req, res, next) {

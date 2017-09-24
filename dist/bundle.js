@@ -1770,7 +1770,7 @@ var CallbackQueue = __webpack_require__(77);
 var PooledClass = __webpack_require__(20);
 var ReactFeatureFlags = __webpack_require__(78);
 var ReactReconciler = __webpack_require__(23);
-var Transaction = __webpack_require__(34);
+var Transaction = __webpack_require__(35);
 
 var invariant = __webpack_require__(1);
 
@@ -2512,7 +2512,7 @@ var _assign = __webpack_require__(4);
 var ReactCurrentOwner = __webpack_require__(15);
 
 var warning = __webpack_require__(2);
-var canDefineProperty = __webpack_require__(31);
+var canDefineProperty = __webpack_require__(32);
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 var REACT_ELEMENT_TYPE = __webpack_require__(68);
@@ -2990,7 +2990,7 @@ var cloneElement = ReactElement.cloneElement;
 
 if (process.env.NODE_ENV !== 'production') {
   var lowPriorityWarning = __webpack_require__(41);
-  var canDefineProperty = __webpack_require__(31);
+  var canDefineProperty = __webpack_require__(32);
   var ReactElementValidator = __webpack_require__(70);
   var didWarnPropTypesDeprecated = false;
   createElement = ReactElementValidator.createElement;
@@ -3327,7 +3327,7 @@ module.exports = ReactReconciler;
 
 
 var DOMNamespaces = __webpack_require__(49);
-var setInnerHTML = __webpack_require__(36);
+var setInnerHTML = __webpack_require__(37);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(50);
 var setTextContent = __webpack_require__(82);
@@ -3591,7 +3591,7 @@ module.exports = EventPropagators;
 
 var _prodInvariant = __webpack_require__(3);
 
-var EventPluginRegistry = __webpack_require__(33);
+var EventPluginRegistry = __webpack_require__(34);
 var EventPluginUtils = __webpack_require__(43);
 var ReactErrorUtils = __webpack_require__(44);
 
@@ -4109,6 +4109,12 @@ var createPath = function createPath(location) {
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(243);
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-present, Facebook, Inc.
@@ -4138,7 +4144,7 @@ module.exports = canDefineProperty;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4164,7 +4170,7 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4423,7 +4429,7 @@ module.exports = EventPluginRegistry;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4657,7 +4663,7 @@ module.exports = TransactionImpl;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4734,7 +4740,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 module.exports = SyntheticMouseEvent;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4837,7 +4843,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = setInnerHTML;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4964,7 +4970,7 @@ function escapeTextContentForBrowser(text) {
 module.exports = escapeTextContentForBrowser;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4982,7 +4988,7 @@ module.exports = escapeTextContentForBrowser;
 
 var _assign = __webpack_require__(4);
 
-var EventPluginRegistry = __webpack_require__(33);
+var EventPluginRegistry = __webpack_require__(34);
 var ReactEventEmitterMixin = __webpack_require__(163);
 var ViewportMetrics = __webpack_require__(81);
 
@@ -5293,7 +5299,7 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
 module.exports = ReactBrowserEventEmitter;
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5367,12 +5373,6 @@ var createLocation = function createLocation(path, state, key, currentLocation) 
 var locationsAreEqual = function locationsAreEqual(a, b) {
   return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && Object(__WEBPACK_IMPORTED_MODULE_1_value_equal__["default"])(a.state, b.state);
 };
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(243);
 
 /***/ }),
 /* 41 */
@@ -5956,7 +5956,7 @@ var ReactDOMComponentTree = __webpack_require__(6);
 var ReactInstrumentation = __webpack_require__(11);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(50);
-var setInnerHTML = __webpack_require__(36);
+var setInnerHTML = __webpack_require__(37);
 var setTextContent = __webpack_require__(82);
 
 function getNodeAfter(parentNode, node) {
@@ -7866,8 +7866,8 @@ var _prodInvariant = __webpack_require__(22),
 
 var ReactNoopUpdateQueue = __webpack_require__(67);
 
-var canDefineProperty = __webpack_require__(31);
-var emptyObject = __webpack_require__(32);
+var canDefineProperty = __webpack_require__(32);
+var emptyObject = __webpack_require__(33);
 var invariant = __webpack_require__(1);
 var lowPriorityWarning = __webpack_require__(41);
 
@@ -8195,7 +8195,7 @@ var ReactElement = __webpack_require__(19);
 
 var checkReactTypeSpec = __webpack_require__(119);
 
-var canDefineProperty = __webpack_require__(31);
+var canDefineProperty = __webpack_require__(32);
 var getIteratorFn = __webpack_require__(69);
 var warning = __webpack_require__(2);
 var lowPriorityWarning = __webpack_require__(41);
@@ -9519,8 +9519,8 @@ module.exports = ViewportMetrics;
 
 
 var ExecutionEnvironment = __webpack_require__(7);
-var escapeTextContentForBrowser = __webpack_require__(37);
-var setInnerHTML = __webpack_require__(36);
+var escapeTextContentForBrowser = __webpack_require__(38);
+var setInnerHTML = __webpack_require__(37);
 
 /**
  * Set the textContent property of a node, ensuring that whitespace is preserved
@@ -10967,7 +10967,7 @@ var _prodInvariant = __webpack_require__(3);
 var DOMLazyTree = __webpack_require__(24);
 var DOMProperty = __webpack_require__(18);
 var React = __webpack_require__(21);
-var ReactBrowserEventEmitter = __webpack_require__(38);
+var ReactBrowserEventEmitter = __webpack_require__(39);
 var ReactCurrentOwner = __webpack_require__(15);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDOMContainerInfo = __webpack_require__(204);
@@ -10980,10 +10980,10 @@ var ReactReconciler = __webpack_require__(23);
 var ReactUpdateQueue = __webpack_require__(56);
 var ReactUpdates = __webpack_require__(16);
 
-var emptyObject = __webpack_require__(32);
+var emptyObject = __webpack_require__(33);
 var instantiateReactComponent = __webpack_require__(88);
 var invariant = __webpack_require__(1);
-var setInnerHTML = __webpack_require__(36);
+var setInnerHTML = __webpack_require__(37);
 var shouldUpdateReactComponent = __webpack_require__(54);
 var warning = __webpack_require__(2);
 
@@ -12388,7 +12388,7 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(40);
+var _axios = __webpack_require__(31);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -12410,7 +12410,17 @@ var Track = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Track.__proto__ || Object.getPrototypeOf(Track)).call(this, props));
 
-    _this.state = _this.props;
+    var currentUTCDate = new Date();
+    currentUTCDate.setHours(currentUTCDate.getHours() - currentUTCDate.getTimezoneOffset() / 60);
+    var localDateTime = currentUTCDate.toISOString().slice(0, -8);
+
+    _this.state = {
+      name: '',
+      amount: '0.25',
+      foodtypes: '',
+      openednewpackage: false,
+      timestamp: localDateTime
+    };
     console.log(_this.state);
 
     _this.handleChange = _this.handleChange.bind(_this);
@@ -12443,12 +12453,12 @@ var Track = function (_React$Component) {
         }
       });
     }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      this.setState(nextProps);
-      console.log(this.state);
-    }
+
+    // componentWillReceiveProps(nextProps) {
+    //   this.setState(nextProps);
+    //   console.log(this.state);
+    // }
+
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
@@ -12462,12 +12472,17 @@ var Track = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      console.log(this.state.amount);
       event.preventDefault();
+      var timezoneOffset = new Date().getTimezoneOffset() / 60;
+      var timestampLocalDateTime = new Date(this.state.timestamp);
+      // const UTCTime = timestampLocalDateTime.setHours(timestampLocalDateTime.getHours() + timezoneOffset);
+      console.log(new Date(timestampLocalDateTime));
+      console.log(this.state.amount);
       _axios2.default.post('/api/track', {
-        name: '' + this.state.name,
-        amount: '' + this.state.amount,
-        openednewpackage: '' + this.state.openednewpackage
+        name: this.state.name,
+        amount: this.state.amount,
+        openednewpackage: this.state.openednewpackage,
+        timestamp: timestampLocalDateTime
       }).then(function (response) {
         console.log(response.data.message);
       }).catch(function (error) {
@@ -12532,23 +12547,58 @@ var Track = function (_React$Component) {
                     { name: 'amount', value: this.state.amount, onChange: this.handleChange },
                     _react2.default.createElement(
                       'option',
+                      { value: '0.10' },
+                      '.10'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { value: '0.20' },
+                      '.20'
+                    ),
+                    _react2.default.createElement(
+                      'option',
                       { value: '0.25' },
-                      '0.25'
+                      '.25'
                     ),
                     _react2.default.createElement(
                       'option',
                       { value: '0.30' },
-                      '0.30'
+                      '.30'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { value: '0.40' },
+                      '.40'
                     ),
                     _react2.default.createElement(
                       'option',
                       { value: '0.50' },
-                      '0.50'
+                      '.50'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { value: '0.60' },
+                      '.60'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { value: '0.70' },
+                      '.70'
                     ),
                     _react2.default.createElement(
                       'option',
                       { value: '0.75' },
-                      '0.75'
+                      '.75'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { value: '0.80' },
+                      '.80'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { value: '0.90' },
+                      '.90'
                     ),
                     _react2.default.createElement(
                       'option',
@@ -12557,6 +12607,20 @@ var Track = function (_React$Component) {
                     )
                   )
                 )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'field' },
+              _react2.default.createElement(
+                'label',
+                { className: 'label' },
+                'Time'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'control' },
+                _react2.default.createElement('input', { type: 'datetime-local', value: this.state.timestamp, name: 'timestamp', onChange: this.handleChange })
               )
             ),
             _react2.default.createElement(
@@ -12574,6 +12638,11 @@ var Track = function (_React$Component) {
               )
             ),
             _react2.default.createElement('input', { className: 'button is-success', type: 'submit', value: 'Submit' })
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'has-text-success' },
+            'Meal Successfully added!'
           )
         )
       );
@@ -12583,15 +12652,17 @@ var Track = function (_React$Component) {
   return Track;
 }(_react2.default.Component);
 
+// Track.defaultProps = {
+//   name: '',
+//   amount: '0.25',
+//   foodtypes: '',
+//   openednewpackage: false,
+//   // timestamp: new Date().toISOString().slice(0, -1),
+//   timestamp: new Date(new Date().toLocaleString()).toISOString().slice(0, -1),
+// };
+
+
 exports.default = Track;
-
-
-Track.defaultProps = {
-  name: '',
-  amount: '0.25',
-  foodtypes: '',
-  openednewpackage: false
-};
 
 /***/ }),
 /* 112 */
@@ -13678,7 +13749,7 @@ module.exports = factory(Component, isValidElement, ReactNoopUpdateQueue);
 
 var _assign = __webpack_require__(4);
 
-var emptyObject = __webpack_require__(32);
+var emptyObject = __webpack_require__(33);
 var _invariant = __webpack_require__(1);
 
 if (process.env.NODE_ENV !== 'production') {
@@ -16528,7 +16599,7 @@ module.exports = DefaultEventPluginOrder;
 
 var EventPropagators = __webpack_require__(25);
 var ReactDOMComponentTree = __webpack_require__(6);
-var SyntheticMouseEvent = __webpack_require__(35);
+var SyntheticMouseEvent = __webpack_require__(36);
 
 var eventTypes = {
   mouseEnter: {
@@ -17329,8 +17400,8 @@ var DOMNamespaces = __webpack_require__(49);
 var DOMProperty = __webpack_require__(18);
 var DOMPropertyOperations = __webpack_require__(85);
 var EventPluginHub = __webpack_require__(26);
-var EventPluginRegistry = __webpack_require__(33);
-var ReactBrowserEventEmitter = __webpack_require__(38);
+var EventPluginRegistry = __webpack_require__(34);
+var ReactBrowserEventEmitter = __webpack_require__(39);
 var ReactDOMComponentFlags = __webpack_require__(73);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDOMInput = __webpack_require__(165);
@@ -17342,7 +17413,7 @@ var ReactMultiChild = __webpack_require__(168);
 var ReactServerRenderingTransaction = __webpack_require__(177);
 
 var emptyFunction = __webpack_require__(10);
-var escapeTextContentForBrowser = __webpack_require__(37);
+var escapeTextContentForBrowser = __webpack_require__(38);
 var invariant = __webpack_require__(1);
 var isEventSupported = __webpack_require__(46);
 var shallowEqual = __webpack_require__(53);
@@ -18867,7 +18938,7 @@ module.exports = memoizeStringOnly;
 
 
 
-var escapeTextContentForBrowser = __webpack_require__(37);
+var escapeTextContentForBrowser = __webpack_require__(38);
 
 /**
  * Escapes attribute value to prevent scripting attacks.
@@ -20255,7 +20326,7 @@ if (process.env.NODE_ENV !== 'production') {
   var checkReactTypeSpec = __webpack_require__(171);
 }
 
-var emptyObject = __webpack_require__(32);
+var emptyObject = __webpack_require__(33);
 var invariant = __webpack_require__(1);
 var shallowEqual = __webpack_require__(53);
 var shouldUpdateReactComponent = __webpack_require__(54);
@@ -21451,7 +21522,7 @@ module.exports = flattenChildren;
 var _assign = __webpack_require__(4);
 
 var PooledClass = __webpack_require__(20);
-var Transaction = __webpack_require__(34);
+var Transaction = __webpack_require__(35);
 var ReactInstrumentation = __webpack_require__(11);
 var ReactServerUpdateQueue = __webpack_require__(178);
 
@@ -21903,7 +21974,7 @@ var DOMChildrenOperations = __webpack_require__(48);
 var DOMLazyTree = __webpack_require__(24);
 var ReactDOMComponentTree = __webpack_require__(6);
 
-var escapeTextContentForBrowser = __webpack_require__(37);
+var escapeTextContentForBrowser = __webpack_require__(38);
 var invariant = __webpack_require__(1);
 var validateDOMNesting = __webpack_require__(57);
 
@@ -22067,7 +22138,7 @@ module.exports = ReactDOMTextComponent;
 var _assign = __webpack_require__(4);
 
 var ReactUpdates = __webpack_require__(16);
-var Transaction = __webpack_require__(34);
+var Transaction = __webpack_require__(35);
 
 var emptyFunction = __webpack_require__(10);
 
@@ -22346,7 +22417,7 @@ var EventPluginHub = __webpack_require__(26);
 var EventPluginUtils = __webpack_require__(43);
 var ReactComponentEnvironment = __webpack_require__(52);
 var ReactEmptyComponent = __webpack_require__(90);
-var ReactBrowserEventEmitter = __webpack_require__(38);
+var ReactBrowserEventEmitter = __webpack_require__(39);
 var ReactHostComponent = __webpack_require__(91);
 var ReactUpdates = __webpack_require__(16);
 
@@ -22384,10 +22455,10 @@ var _assign = __webpack_require__(4);
 
 var CallbackQueue = __webpack_require__(77);
 var PooledClass = __webpack_require__(20);
-var ReactBrowserEventEmitter = __webpack_require__(38);
+var ReactBrowserEventEmitter = __webpack_require__(39);
 var ReactInputSelection = __webpack_require__(94);
 var ReactInstrumentation = __webpack_require__(11);
-var Transaction = __webpack_require__(34);
+var Transaction = __webpack_require__(35);
 var ReactUpdateQueue = __webpack_require__(56);
 
 /**
@@ -23476,7 +23547,7 @@ var SyntheticClipboardEvent = __webpack_require__(196);
 var SyntheticEvent = __webpack_require__(17);
 var SyntheticFocusEvent = __webpack_require__(197);
 var SyntheticKeyboardEvent = __webpack_require__(198);
-var SyntheticMouseEvent = __webpack_require__(35);
+var SyntheticMouseEvent = __webpack_require__(36);
 var SyntheticDragEvent = __webpack_require__(200);
 var SyntheticTouchEvent = __webpack_require__(201);
 var SyntheticTransitionEvent = __webpack_require__(202);
@@ -24031,7 +24102,7 @@ module.exports = getEventKey;
 
 
 
-var SyntheticMouseEvent = __webpack_require__(35);
+var SyntheticMouseEvent = __webpack_require__(36);
 
 /**
  * @interface DragEvent
@@ -24166,7 +24237,7 @@ module.exports = SyntheticTransitionEvent;
 
 
 
-var SyntheticMouseEvent = __webpack_require__(35);
+var SyntheticMouseEvent = __webpack_require__(36);
 
 /**
  * @interface WheelEvent
@@ -24496,7 +24567,7 @@ module.exports = ReactMount.renderSubtreeIntoContainer;
 
 
 var DOMProperty = __webpack_require__(18);
-var EventPluginRegistry = __webpack_require__(33);
+var EventPluginRegistry = __webpack_require__(34);
 var ReactComponentTreeHook = __webpack_require__(9);
 
 var warning = __webpack_require__(2);
@@ -26288,7 +26359,7 @@ Redirect.contextTypes = {
 /* unused harmony reexport createHashHistory */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(231);
 /* unused harmony reexport createMemoryHistory */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(40);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(30);
@@ -26313,7 +26384,7 @@ Redirect.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(105);
@@ -26617,7 +26688,7 @@ var createBrowserHistory = function createBrowserHistory() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(105);
@@ -26937,7 +27008,7 @@ var createHashHistory = function createHashHistory() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(64);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -27546,6 +27617,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
@@ -27584,76 +27657,143 @@ __webpack_require__(265);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App() {
-  return _react2.default.createElement(
-    _reactRouterDom.BrowserRouter,
-    null,
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(
-        'nav',
-        { role: 'navigation', 'aria-label': 'main navigation', className: 'navbar' },
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var App = function (_React$Component) {
+  _inherits(App, _React$Component);
+
+  function App(props) {
+    _classCallCheck(this, App);
+
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = {
+      navbarMenuClassNames: 'navbar-menu',
+      navbarBurgerClassNames: 'button navbar-burger'
+    };
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: 'openNavbarMenu',
+    value: function openNavbarMenu(event) {
+      console.log(event.target.className);
+      console.log(event.target.className.search('is-active'));
+      console.log(event.target.className.search('is-active') === -1);
+      if (event.target.className.search('is-active') === -1) {
+        this.setState({
+          navbarMenuClassNames: 'navbar-menu is-active',
+          navbarBurgerClassNames: 'button navbar-burger is-active'
+        });
+      } else {
+        this.setState({
+          navbarMenuClassNames: 'navbar-menu',
+          navbarBurgerClassNames: 'button navbar-burger'
+        });
+      }
+    }
+  }, {
+    key: 'closeNavBar',
+    value: function closeNavBar() {
+      if (this.state.navbarBurgerClassNames.search('is-active') !== -1) {
+        this.setState({
+          navbarMenuClassNames: 'navbar-menu',
+          navbarBurgerClassNames: 'button navbar-burger'
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactRouterDom.BrowserRouter,
+        null,
         _react2.default.createElement(
           'div',
-          { className: 'navbar-brand' },
+          null,
           _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/', className: 'navbar-item' },
-            'Home'
+            'nav',
+            { role: 'navigation', 'aria-label': 'main navigation', className: 'navbar' },
+            _react2.default.createElement(
+              'div',
+              { className: 'navbar-brand' },
+              _react2.default.createElement(
+                'button',
+                { className: this.state.navbarBurgerClassNames, onClick: this.openNavbarMenu.bind(this) },
+                _react2.default.createElement('span', null),
+                _react2.default.createElement('span', null),
+                _react2.default.createElement('span', null)
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: this.state.navbarMenuClassNames, onClick: this.closeNavBar.bind(this) },
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-start' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/', className: 'navbar-item' },
+                  'Home'
+                ),
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/track', className: 'navbar-item' },
+                  'Track'
+                ),
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/meals', className: 'navbar-item' },
+                  'Meals'
+                ),
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/stats', className: 'navbar-item' },
+                  'Stats'
+                ),
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/addfood', className: 'navbar-item' },
+                  'Add Food'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-end' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/account', className: 'navbar-item' },
+                  'Account'
+                ),
+                _react2.default.createElement(
+                  'a',
+                  { href: '/api/auth', className: 'navbar-item' },
+                  'Login'
+                )
+              )
+            )
           ),
           _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/track', className: 'navbar-item' },
-            'Track'
-          ),
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/meals', className: 'navbar-item' },
-            'Meals'
-          ),
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/stats', className: 'navbar-item' },
-            'Stats'
-          ),
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/addfood', className: 'navbar-item' },
-            'Add Food'
-          ),
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/account', className: 'navbar-item' },
-            'Account'
-          ),
-          _react2.default.createElement(
-            'a',
-            { href: '/api/auth', className: 'navbar-item' },
-            'Login'
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: 'button navbar-burger' },
-            _react2.default.createElement('span', null),
-            _react2.default.createElement('span', null),
-            _react2.default.createElement('span', null)
+            'main',
+            null,
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Home2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/track', component: _Track2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/meals', component: _Meals2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/stats', component: _Stats2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/addfood', component: _Addfood2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/account', component: _Account2.default })
           )
         )
-      ),
-      _react2.default.createElement(
-        'main',
-        null,
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Home2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/track', component: _Track2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/meals', component: _Meals2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/stats', component: _Stats2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/addfood', component: _Addfood2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/account', component: _Account2.default })
-      )
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return App;
+}(_react2.default.Component);
 
 exports.default = App;
 
@@ -27728,7 +27868,7 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(40);
+var _axios = __webpack_require__(31);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -27799,11 +27939,6 @@ var Meals = function (_React$Component) {
                   'button',
                   { id: meal._id, className: 'button is-danger is-small', onClick: _this2.deleteMeal.bind(_this2) },
                   'Delete'
-                ),
-                _react2.default.createElement(
-                  'button',
-                  { id: meal._id, 'data-name': meal.name, 'data-amount': meal.packageportion, className: 'button is-warning is-small', onClick: _this2.showEditModal.bind(_this2) },
-                  'Edit'
                 )
               )
             );
@@ -27877,48 +28012,6 @@ var Meals = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'div',
-          { className: this.state.modalClassNames },
-          _react2.default.createElement('div', { className: 'modal-background' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-card' },
-            _react2.default.createElement(
-              'header',
-              { className: 'modal-card-head' },
-              _react2.default.createElement(
-                'p',
-                { className: 'modal-card-title' },
-                'Edit Meal'
-              ),
-              _react2.default.createElement('button', { className: 'delete', 'aria-label': 'close', onClick: this.closeEditModal.bind(this) })
-            ),
-            _react2.default.createElement(
-              'section',
-              { className: 'modal-card-body' },
-              _react2.default.createElement(_Track2.default, {
-                name: this.state.editName,
-                amount: this.state.editAmount,
-                id: this.state.editId
-              })
-            ),
-            _react2.default.createElement(
-              'footer',
-              { className: 'modal-card-foot' },
-              _react2.default.createElement(
-                'button',
-                { className: 'button is-success' },
-                'Save changes'
-              ),
-              _react2.default.createElement(
-                'button',
-                { className: 'button' },
-                'Cancel'
-              )
-            )
-          )
-        ),
         this.state.mealList && _react2.default.createElement(
           'div',
           null,
@@ -28859,7 +28952,7 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(40);
+var _axios = __webpack_require__(31);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -28939,7 +29032,13 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _axios = __webpack_require__(31);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -28950,22 +29049,235 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Addfood = function (_React$Component) {
   _inherits(Addfood, _React$Component);
 
-  function Addfood() {
+  function Addfood(props) {
     _classCallCheck(this, Addfood);
 
-    return _possibleConstructorReturn(this, (Addfood.__proto__ || Object.getPrototypeOf(Addfood)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Addfood.__proto__ || Object.getPrototypeOf(Addfood)).call(this, props));
+
+    _this.state = {
+      name: '',
+      volume: '',
+      packageDailyEquivalent: '',
+      foodTable: []
+    };
+    console.log(_this.state);
+
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
   }
 
   _createClass(Addfood, [{
+    key: 'updateTable',
+    value: function updateTable(array) {
+      var _this2 = this;
+
+      var newRow = array.map(function (food) {
+        return _react2.default.createElement(
+          'tr',
+          { key: food._id },
+          _react2.default.createElement(
+            'td',
+            null,
+            food.name
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            food.volume
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            food.packageDailyEquivalent
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            _react2.default.createElement(
+              'button',
+              { id: food._id, className: 'button is-danger is-small', onClick: _this2.deleteFood.bind(_this2) },
+              'Delete'
+            )
+          )
+        );
+      });
+      var currentTableBody = this.state.foodTable;
+      console.log(currentTableBody);
+      var foodTable = currentTableBody.concat(newRow);
+      console.log(foodTable);
+      this.setState({
+        foodTable: foodTable,
+        name: '',
+        volume: '',
+        packageDailyEquivalent: ''
+      });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      _axios2.default.get('http://localhost:3000/api/track').then(function (result) {
+        if (result.data.message === 'unauthorized') {
+          console.log('you need to log in');
+          window.location.href = 'http://localhost:3000/api/auth';
+        } else {
+          _this3.updateTable(result.data);
+        }
+      });
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      var target = event.target;
+      var value = target.type === 'checkbox' ? target.checked : target.value;
+      var name = target.name;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      var _this4 = this;
+
+      event.preventDefault();
+      _axios2.default.post('/api/addfood', {
+        name: this.state.name,
+        volume: this.state.volume,
+        packageDailyEquivalent: this.state.packageDailyEquivalent
+      }).then(function (response) {
+        var newFoodArray = [];
+        newFoodArray.push(response.data.food);
+        _this4.updateTable(newFoodArray);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: 'deleteFood',
+    value: function deleteFood(event) {
+      var _this5 = this;
+
+      console.log(event.target.id);
+      _axios2.default.delete('http://localhost:3000/api/addfood', {
+        data: { _id: event.target.id }
+      }).then(function (result) {
+        console.log(result.data);
+        var foodTable = _this5.state.foodTable.filter(function (row) {
+          return row.key !== result.data.foodId;
+        });
+        _this5.setState({
+          foodTable: foodTable
+        });
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
-          'h2',
+          'h1',
           { className: 'title' },
-          'Add Food'
+          'Add New Food '
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'column is-half' },
+          _react2.default.createElement(
+            'form',
+            { onSubmit: this.handleSubmit },
+            _react2.default.createElement(
+              'div',
+              { className: 'field' },
+              _react2.default.createElement(
+                'label',
+                { id: 'name', className: 'label' },
+                'Name/Brand/Flavor'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'control' },
+                _react2.default.createElement('input', { type: 'text', name: 'name', value: this.state.name, className: 'input', onChange: this.handleChange })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'field' },
+              _react2.default.createElement(
+                'label',
+                { id: 'volume', className: 'label' },
+                'Volume in grams'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'control' },
+                _react2.default.createElement('input', { type: 'text', name: 'volume', value: this.state.volume, className: 'input', onChange: this.handleChange })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'field' },
+              _react2.default.createElement(
+                'label',
+                { id: 'packageDailyEquivalent', className: 'label' },
+                'Package portion of daily requirements'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'control' },
+                _react2.default.createElement('input', { type: 'text', name: 'packageDailyEquivalent', value: this.state.packageDailyEquivalent, className: 'input', onChange: this.handleChange })
+              )
+            ),
+            _react2.default.createElement('input', { type: 'submit', value: 'Submit', className: 'button is-success' })
+          )
+        ),
+        this.state.foodTable && _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h2',
+            { className: 'title' },
+            'Food'
+          ),
+          _react2.default.createElement(
+            'table',
+            { className: 'table is-striped is-bordered' },
+            _react2.default.createElement(
+              'thead',
+              null,
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Name'
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Volume'
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  '% of Daily Requirement'
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Change'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'tbody',
+              null,
+              this.state.foodTable
+            )
+          )
         )
       );
     }
@@ -29047,7 +29359,7 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(40);
+var _axios = __webpack_require__(31);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -29140,7 +29452,7 @@ exports = module.exports = __webpack_require__(267)(undefined);
 
 
 // module
-exports.push([module.i, "html, body {\n  width: 100%;\n  margin: 0;\n}\n\n/* \nnav {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n  width: 100%;\n  height: 40px;\n  background: #eee;\n  margin: 0 0 20px 0;\n}\n\nnav > * {\n  margin: 0 10px;\n}\n\nnav a {\n  text-decoration: none;\n  color: black;\n} */\n\nmain {\n  margin: 20px;\n}\n\n\n/* .flex {\n  display: flex;\n  width: 500px;\n  justify-content: space-around;\n} */", ""]);
+exports.push([module.i, "html, body {\n  width: 100%;\n  margin: 0;\n}\n\n/* td > .button.is-danger {\n  margin-right: 5px;\n} */\n\n/* \nnav {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n  width: 100%;\n  height: 40px;\n  background: #eee;\n  margin: 0 0 20px 0;\n}\n\nnav > * {\n  margin: 0 10px;\n}\n\nnav a {\n  text-decoration: none;\n  color: black;\n} */\n\nmain {\n  margin: 20px;\n}\n\n\n/* .flex {\n  display: flex;\n  width: 500px;\n  justify-content: space-around;\n} */", ""]);
 
 // exports
 

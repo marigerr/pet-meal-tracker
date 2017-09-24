@@ -27,7 +27,7 @@ export default class Meals extends React.Component {
             <td>{new Date(meal.timestamp).toLocaleString()}</td>
             <td>
               <button id={meal._id} className='button is-danger is-small' onClick={this.deleteMeal.bind(this)}>Delete</button>
-              <button id={meal._id} data-name={meal.name} data-amount={meal.packageportion} className='button is-warning is-small' onClick={this.showEditModal.bind(this)}>Edit</button>
+              {/* <button id={meal._id} data-name={meal.name} data-amount={meal.packageportion} className='button is-warning is-small' onClick={this.showEditModal.bind(this)}>Edit</button> */}
             </td>
           </tr>);
         this.setState({
@@ -87,7 +87,8 @@ export default class Meals extends React.Component {
   render() {
     return (
       <div>
-        <div className={this.state.modalClassNames}>
+
+        {/* <div className={this.state.modalClassNames}>
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
@@ -106,7 +107,7 @@ export default class Meals extends React.Component {
               <button className="button">Cancel</button>
             </footer>
           </div>
-        </div>
+        </div> */}
 
 
         {this.state.mealList &&

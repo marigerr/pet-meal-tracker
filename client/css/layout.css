@@ -3,6 +3,10 @@ html, body {
   margin: 0;
 }
 
+/* td > .button.is-danger {
+  margin-right: 5px;
+} */
+
 /* 
 nav {
   display: flex;

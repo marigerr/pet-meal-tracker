@@ -4,7 +4,17 @@ import axios from 'axios';
 export default class Track extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props;
+    const currentUTCDate = new Date();
+    currentUTCDate.setHours(currentUTCDate.getHours() - (currentUTCDate.getTimezoneOffset() / 60));
+    const localDateTime = currentUTCDate.toISOString().slice(0, -8);
+
+    this.state = {
+      name: '',
+      amount: '0.25',
+      foodtypes: '',
+      openednewpackage: false,
+      timestamp: localDateTime,
+    };
     console.log(this.state);
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,10 +37,10 @@ export default class Track extends React.Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState(nextProps);
-    console.log(this.state);
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState(nextProps);
+  //   console.log(this.state);
+  // }
 
   handleChange(event) {
     const target = event.target;
@@ -42,12 +52,17 @@ export default class Track extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(this.state.amount);
     event.preventDefault();
+    const timezoneOffset = new Date().getTimezoneOffset() / 60;
+    const timestampLocalDateTime = new Date(this.state.timestamp);
+    // const UTCTime = timestampLocalDateTime.setHours(timestampLocalDateTime.getHours() + timezoneOffset);
+    console.log(new Date(timestampLocalDateTime));
+    console.log(this.state.amount);
     axios.post('/api/track', {
-      name: `${this.state.name}`,
-      amount: `${this.state.amount}`,
-      openednewpackage: `${this.state.openednewpackage}`,
+      name: this.state.name,
+      amount: this.state.amount,
+      openednewpackage: this.state.openednewpackage,
+      timestamp: timestampLocalDateTime,
     })
       .then((response) => {
         console.log(response.data.message);
@@ -82,13 +97,27 @@ export default class Track extends React.Component {
                 <div className="control">
                   <div className="select">
                     <select name="amount" value={this.state.amount} onChange={this.handleChange}>
-                      <option value="0.25">0.25</option>
-                      <option value="0.30">0.30</option>
-                      <option value="0.50">0.50</option>
-                      <option value="0.75">0.75</option>
+                      <option value="0.10">.10</option>
+                      <option value="0.20">.20</option>
+                      <option value="0.25">.25</option>
+                      <option value="0.30">.30</option>
+                      <option value="0.40">.40</option>
+                      <option value="0.50">.50</option>
+                      <option value="0.60">.60</option>
+                      <option value="0.70">.70</option>
+                      <option value="0.75">.75</option>
+                      <option value="0.80">.80</option>
+                      <option value="0.90">.90</option>
                       <option value="1">1</option>
                     </select>
                   </div>
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label">Time</label>
+                <div className="control">
+                  <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange}/>
                 </div>
               </div>
 
@@ -103,6 +132,9 @@ export default class Track extends React.Component {
               <input className='button is-success' type="submit" value="Submit" />
 
             </form >
+
+            <p className='has-text-success'>Meal Successfully added!</p>
+
           </div >
         }
       </div >
@@ -110,9 +142,11 @@ export default class Track extends React.Component {
   }
 }
 
-Track.defaultProps = {
-  name: '',
-  amount: '0.25',
-  foodtypes: '',
-  openednewpackage: false,
-};
+// Track.defaultProps = {
+//   name: '',
+//   amount: '0.25',
+//   foodtypes: '',
+//   openednewpackage: false,
+//   // timestamp: new Date().toISOString().slice(0, -1),
+//   timestamp: new Date(new Date().toLocaleString()).toISOString().slice(0, -1),
+// };

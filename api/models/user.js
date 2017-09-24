@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const logger = require('tracer').console();
 
 const Schema = mongoose.Schema;
 
@@ -18,8 +19,8 @@ const UserSchema = new Schema({
 UserSchema.methods.incrementLoginCount = function () {
   this.last_login = new Date();
   this.login_count = this.login_count + 1;
-  console.log(`New login count ${this.login_count}`);
-  console.log(`Last login ${this.last_login}`);
+  logger.log(`New login count ${this.login_count}`);
+  logger.log(`Last login ${this.last_login}`);
   return this;
 };
 
