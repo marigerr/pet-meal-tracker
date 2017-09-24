@@ -7,15 +7,29 @@ exports.getStats = (req, res) => {
     if (err) {
       logger.log(err);
     } else {
-      Meal.find({
-        oauthID: user.oauthID,
-      })
-        .sort({ timestamp: 'asc' })
-        .exec((error, meals) => {
-          // res.render('stats', { isAuthenticated: true, title: 'Tracker-Stats', meals });
-          res.json(meals);
-        });
+      Meal.aggregate([
+        {
+          $match: {
+            oauthID: user.oauthID,
+          },
+        },
+        {
+          $project: {
+            dayOfYear: { $substr: ['$timestamp', 0, 10] },
+            percentDailyValue: true,
+          },
+        },
+        {
+          $group: {
+            _id: '$dayOfYear',
+            percentDailyValue: { $sum: '$percentDailyValue' },
+          },
+        },
+        { $sort: { _id: 1 } },
+      ], (error, meals) => {
+        if (error) logger.log(error);
+        res.json(meals);
+      });
     }
   });
-}
-;
+};

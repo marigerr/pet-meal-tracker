@@ -47,7 +47,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="is-fullheight">
           <nav role="navigation" aria-label="main navigation" className="navbar">
             <div className="navbar-brand">
               <button className={this.state.navbarBurgerClassNames} onClick={this.openNavbarMenu.bind(this)}>
@@ -70,14 +70,14 @@ export default class App extends React.Component {
               </div>
             </div>
           </nav>
-          <main>
+          <section className="section">
             <Route exact path="/" component={Home} />
             <Route path="/track" component={Track} />
             <Route path="/meals" component={Meals} />
             <Route path="/stats" component={Stats} />
             <Route path="/addfood" component={Addfood} />
             <Route path="/account" component={Account} />
-          </main>
+          </section>
         </div>
       </Router>
     );

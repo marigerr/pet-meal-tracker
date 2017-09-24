@@ -9,11 +9,15 @@ export default class Track extends React.Component {
     const localDateTime = currentUTCDate.toISOString().slice(0, -8);
 
     this.state = {
-      name: '',
+      id: '',
+      brandId: '',
+      brand: '',
       amount: '0.25',
-      foodtypes: '',
       openednewpackage: false,
+      percentDailyValue: 0,
       timestamp: localDateTime,
+      foodtypes: [],
+      foodtypesOptions: '',
     };
     console.log(this.state);
 
@@ -22,16 +26,20 @@ export default class Track extends React.Component {
   }
 
   componentDidMount() {
+    document.title = 'Tracker - track';
     axios.get('http://localhost:3000/api/track').then((result) => {
       console.log(result.data);
       if (result.data.message === 'unauthorized') {
         console.log('you need to log in');
         window.location.href = 'http://localhost:3000/api/auth';
       } else {
-        const foodtypes = result.data.map(type => <option key={type._id} value={type.name}>{type.name}</option>);
         this.setState({
-          foodtypes,
-          name: result.data[0].name,
+          foodtypes: result.data,
+        });
+        const foodtypesOptions = result.data.map(type => <option key={type._id} value={type._id}>{type.brand}</option>);
+        this.setState({
+          foodtypesOptions,
+          brandId: result.data[0]._id,
         });
       }
     });
@@ -48,19 +56,26 @@ export default class Track extends React.Component {
     const name = target.name;
     console.log(event.target.name);
     console.log(event.target.value);
-    this.setState({ [name]: value });
+    console.log(event.target);
+    this.setState({
+      [name]: value,
+      // id: value,
+    }, () => console.log(this.state));
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const timezoneOffset = new Date().getTimezoneOffset() / 60;
     const timestampLocalDateTime = new Date(this.state.timestamp);
-    // const UTCTime = timestampLocalDateTime.setHours(timestampLocalDateTime.getHours() + timezoneOffset);
-    console.log(new Date(timestampLocalDateTime));
-    console.log(this.state.amount);
+
+    console.log(this.state.foodtypes);
+    const foodtypesArr = this.state.foodtypes;
+    const selectedFoodtype = foodtypesArr.find(food => food._id === this.state.brandId);
+    console.log(selectedFoodtype);
     axios.post('/api/track', {
-      name: this.state.name,
+      brand: selectedFoodtype.brand,
       amount: this.state.amount,
+      percentDailyValue: this.state.amount * selectedFoodtype.packageDailyEquivalent,
       openednewpackage: this.state.openednewpackage,
       timestamp: timestampLocalDateTime,
     })
@@ -76,24 +91,26 @@ export default class Track extends React.Component {
   render() {
     return (
       <div>
-        {this.state.foodtypes &&
+        {this.state.foodtypesOptions &&
           <div>
             <h2 className='title'>Track</h2>
 
             <form onSubmit={this.handleSubmit}>
+              {/* <input type="text" name="id" value={this.state.id} className="input is-hidden" onChange={this.handleChange} />
+              <input type="text" name="packageDailyEquivalent" value={this.state.packageDailyEquivalent} className="input is-hidden" onChange={this.handleChange} /> */}
               <div className="field">
                 <label className="label">Select Food Type</label>
                 <div className="control">
                   <div className="select">
-                    <select name="name" value={this.state.name} onChange={this.handleChange}>
-                      {this.state.foodtypes}
+                    <select name="brandId" value={this.state.brandId} onChange={this.handleChange}>
+                      {this.state.foodtypesOptions}
                     </select>
                   </div>
                 </div>
               </div>
 
               <div className="field">
-                <label className="label">Portion</label>
+                <label className="label">Package Portion</label>
                 <div className="control">
                   <div className="select">
                     <select name="amount" value={this.state.amount} onChange={this.handleChange}>
@@ -117,7 +134,7 @@ export default class Track extends React.Component {
               <div className="field">
                 <label className="label">Time</label>
                 <div className="control">
-                  <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange}/>
+                  <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange} />
                 </div>
               </div>
 

@@ -14,6 +14,7 @@ export default class Meals extends React.Component {
     };
   }
   componentDidMount() {
+    document.title = 'Tracker - Meals';
     axios.get('http://localhost:3000/api/meals').then((result) => {
       console.log(result);
       if (result.data.message === 'unauthorized') {
@@ -22,8 +23,9 @@ export default class Meals extends React.Component {
       } else {
         const mealList = result.data.map(meal =>
           <tr key={meal._id}>
-            <td>{meal.name}</td>
+            <td>{meal.brand}</td>
             <td>{meal.packageportion}</td>
+            <td>{meal.percentDailyValue}</td>
             <td>{new Date(meal.timestamp).toLocaleString()}</td>
             <td>
               <button id={meal._id} className='button is-danger is-small' onClick={this.deleteMeal.bind(this)}>Delete</button>
@@ -117,7 +119,8 @@ export default class Meals extends React.Component {
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Portion</th>
+                  <th>Package Portion</th>
+                  <th>Daily Percent</th>
                   <th>Time</th>
                   <th>Change</th>
                 </tr>

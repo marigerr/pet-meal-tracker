@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const FoodtypeSchema = new Schema({
   _id: Schema.Types.ObjectId,
   oauthID: String,
-  name: String,
+  brand: String,
   volume: Number,
   packageDailyEquivalent: Number,
 });

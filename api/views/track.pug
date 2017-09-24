@@ -8,9 +8,9 @@ block content
         label.label Select Food Type
         .control
           .select
-            select(name="name")
+            select(name="brand")
               each food in user.foodtypes
-                option(value=food.name) #{food.name}
+                option(value=food.brand) #{food.name}
 
       .field
         label.label Portion

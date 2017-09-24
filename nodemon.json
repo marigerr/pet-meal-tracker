@@ -4,7 +4,8 @@
     ".git",
     "node_modules/**/node_modules", 
     "client/*",
-    "dist/*"
+    "dist/*",
+    "databaseSeed/*"
   ],
   "verbose": true
 }

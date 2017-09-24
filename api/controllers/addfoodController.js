@@ -12,7 +12,7 @@ exports.postAddfood = (req, res) => {
       const food = new Foodtype({
         _id: new mongoose.Types.ObjectId(),
         oauthID: user.oauthID,
-        name: req.body.name,
+        brand: req.body.brand,
         volume: req.body.volume,
         packageDailyEquivalent: req.body.packageDailyEquivalent,
       });

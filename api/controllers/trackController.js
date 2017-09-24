@@ -25,8 +25,9 @@ exports.postTrack = (req, res) => {
         logger.log(req.body.timestamp);
         logger.log(new Date(req.body.timestamp));
         const meal = new Meal({
-          name: req.body.name,
+          brand: req.body.brand,
           packageportion: req.body.amount,
+          percentDailyValue: req.body.percentDailyValue,
           openednewpackage: req.body.openednewpackage,
           oauthID: user.oauthID,
           timestamp: req.body.timestamp,

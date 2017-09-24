@@ -5,7 +5,7 @@ export default class Addfood extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      brand: '',
       volume: '',
       packageDailyEquivalent: '',
       foodTable: [],
@@ -19,12 +19,12 @@ export default class Addfood extends React.Component {
   updateTable(array) {
     const newRow = array.map(food =>
       <tr key={food._id}>
-        <td>{food.name}</td>
+        <td>{food.brand}</td>
         <td>{food.volume}</td>
         <td>{food.packageDailyEquivalent}</td>
         <td>
           <button id={food._id} className='button is-danger is-small' onClick={this.deleteFood.bind(this)}>Delete</button>
-          {/* <button id={food._id} data-name={food.name} data-amount={food.packageportion} className='button is-warning is-small' onClick={this.showEditModal.bind(this)}>Edit</button> */}
+          {/* <button id={food._id} data-brand={food.brand} data-amount={food.packageportion} className='button is-warning is-small' onClick={this.showEditModal.bind(this)}>Edit</button> */}
         </td>
       </tr>);
     const currentTableBody = this.state.foodTable;
@@ -33,7 +33,7 @@ export default class Addfood extends React.Component {
     console.log(foodTable);
     this.setState({
       foodTable,
-      name: '',
+      brand: '',
       volume: '',
       packageDailyEquivalent: '',
     });
@@ -60,7 +60,7 @@ export default class Addfood extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     axios.post('/api/addfood', {
-      name: this.state.name,
+      brand: this.state.brand,
       volume: this.state.volume,
       packageDailyEquivalent: this.state.packageDailyEquivalent,
     })
@@ -94,9 +94,9 @@ export default class Addfood extends React.Component {
         <div className="column is-half">
           <form onSubmit={this.handleSubmit}>
             <div className="field">
-              <label id="name" className="label">Name/Brand/Flavor</label>
+              <label id="brand" className="label">Name/Brand/Flavor</label>
               <div className="control">
-                <input type="text" name="name" value={this.state.name} className="input" onChange={this.handleChange} />
+                <input type="text" name="brand" value={this.state.brand} className="input" onChange={this.handleChange} />
               </div>
             </div>
             <div className="field">
