@@ -25,8 +25,8 @@ export default class Meals extends React.Component {
           <tr key={meal._id}>
             <td>{meal.brand}</td>
             <td>{meal.packageportion}</td>
-            <td>{meal.percentDailyValue}</td>
-            <td>{new Date(meal.timestamp).toLocaleString()}</td>
+            <td>{Math.round(meal.percentDailyValue * 100)}%</td>
+            <td>{new Date(meal.timestamp).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })}</td>
             <td>
               <button id={meal._id} className='button is-danger is-small' onClick={this.deleteMeal.bind(this)}>Delete</button>
               {/* <button id={meal._id} data-name={meal.name} data-amount={meal.packageportion} className='button is-warning is-small' onClick={this.showEditModal.bind(this)}>Edit</button> */}

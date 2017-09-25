@@ -18,6 +18,9 @@ export default class Track extends React.Component {
       timestamp: localDateTime,
       foodtypes: [],
       foodtypesOptions: '',
+      submittedMessage: false,
+      // messageSuccess: 'has-text-success',
+      // messageError: 'has-text-warning',
     };
     console.log(this.state);
 
@@ -80,13 +83,63 @@ export default class Track extends React.Component {
       timestamp: timestampLocalDateTime,
     })
       .then((response) => {
-        console.log(response.data.message);
+        console.log(response.data);
+        this.setState({
+          showMessage: true,
+          addedmeal: true,
+          addedmealBrand: response.data.meal.brand,
+          addedmealPortion: response.data.meal.packageportion,
+          addedmealPercentDailyValue: response.data.meal.percentDailyValue,
+          addedmealtimestamp: response.data.meal.timestamp,
+        });
       })
       .catch((error) => {
         console.log(error);
+        this.setState({
+          showMessage: true,
+          addedmeal: false,
+        });
       });
   }
 
+  feedbackMessage() {
+    if (this.state.showMessage) {
+      if (this.state.addedmeal) {
+        return (
+          <div className="column is-half">
+            <article className="show-message message is-success">
+              <div className="message-header">
+                <p>Meal Added!</p>
+                <button onClick={this.closeMessage.bind(this)} className="delete" aria-label="delete"></button>
+              </div>
+              <div className="message-body">
+                <p>{this.state.addedmealBrand} : {this.state.addedmealPortion} package  </p>
+                <p>{Math.round(this.state.addedmealPercentDailyValue * 100)}% of daily calories</p>
+                <p>{new Date(this.state.addedmealtimestamp).toLocaleString()}</p>
+              </div>
+            </article>
+          </div>
+          // <p className='has-text-success show-message'>Meal Successfully added!</p>
+        );
+      }
+      return (
+        <div className="column is-half">
+          <div className="notification is-danger">
+            <button onClick={this.closeMessage.bind(this)} className="delete"></button>
+            Error - please try submitting meal again
+          </div>
+        </div>
+        // <p className='has-text-warning show-message'>Error - please submit meal again</p>
+      );
+    }
+    return null;
+  }
+
+  closeMessage() {
+    this.setState({
+      showMessage: false,
+    });
+  }
 
   render() {
     return (
@@ -98,59 +151,93 @@ export default class Track extends React.Component {
             <form onSubmit={this.handleSubmit}>
               {/* <input type="text" name="id" value={this.state.id} className="input is-hidden" onChange={this.handleChange} />
               <input type="text" name="packageDailyEquivalent" value={this.state.packageDailyEquivalent} className="input is-hidden" onChange={this.handleChange} /> */}
-              <div className="field">
-                <label className="label">Select Food Type</label>
-                <div className="control">
-                  <div className="select">
-                    <select name="brandId" value={this.state.brandId} onChange={this.handleChange}>
-                      {this.state.foodtypesOptions}
-                    </select>
+              <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                  <label className="label">Select Food Type</label>
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <div className="select">
+                        <select name="brandId" value={this.state.brandId} onChange={this.handleChange}>
+                          {this.state.foodtypesOptions}
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="field">
-                <label className="label">Package Portion</label>
-                <div className="control">
-                  <div className="select">
-                    <select name="amount" value={this.state.amount} onChange={this.handleChange}>
-                      <option value="0.10">.10</option>
-                      <option value="0.20">.20</option>
-                      <option value="0.25">.25</option>
-                      <option value="0.30">.30</option>
-                      <option value="0.40">.40</option>
-                      <option value="0.50">.50</option>
-                      <option value="0.60">.60</option>
-                      <option value="0.70">.70</option>
-                      <option value="0.75">.75</option>
-                      <option value="0.80">.80</option>
-                      <option value="0.90">.90</option>
-                      <option value="1">1</option>
-                    </select>
+              <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                  <label className="label">Package Portion</label>
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <div className="select">
+                        <select name="amount" value={this.state.amount} onChange={this.handleChange}>
+                          <option value="0.10">.10</option>
+                          <option value="0.20">.20</option>
+                          <option value="0.25">.25</option>
+                          <option value="0.30">.30</option>
+                          <option value="0.40">.40</option>
+                          <option value="0.50">.50</option>
+                          <option value="0.60">.60</option>
+                          <option value="0.70">.70</option>
+                          <option value="0.75">.75</option>
+                          <option value="0.80">.80</option>
+                          <option value="0.90">.90</option>
+                          <option value="1">1</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="field">
-                <label className="label">Time</label>
-                <div className="control">
-                  <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange} />
+              <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                  <label className="label">Time</label>
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange} />
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="field">
-                <div className="control">
-                  <label className="checkbox">
-                    <input name="openednewpackage" type="checkbox" value={this.state.openednewpackage} onChange={this.handleChange} /> Opened New Package
-                  </label>
+              <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                  <label className="label checkbox is-normal">Opened New Package</label>
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      {/* <label className="checkbox is-normal"> */}
+                      <input className="is-normal" name="openednewpackage" type="checkbox" value={this.state.openednewpackage} onChange={this.handleChange} />
+                      {/* </label> */}
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <input className='button is-success' type="submit" value="Submit" />
+              <div className="field is-horizontal">
+                <div className="field-label">
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <input className='button is-success' type="submit" value="Submit" />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </form >
 
-            <p className='has-text-success'>Meal Successfully added!</p>
+            {this.feedbackMessage()}
 
           </div >
         }

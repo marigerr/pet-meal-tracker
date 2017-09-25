@@ -1,3 +1,36 @@
+input[type="datetime-local"] {
+  border-color: rgb(219, 219, 219);
+  padding: 5 9;
+  font-size: 1em;
+  border-style: solid;
+  border-width: 1px;
+  color: rgb(54, 54, 54);
+}
+
+input[type="checkbox"] {
+  /* font-size: 16px; */
+  margin-top: 10px;
+  /* padding: 5px; */
+}
+
+
+/* @keyframes exit-message {
+  0% {
+  	opacity: 1;
+  }
+  77% {
+  	opacity: 1;
+  }
+  100% {
+  	opacity: 0;
+  }
+}
+
+.show-message {
+  opacity: 0;
+  animation: exit-message 4s ease;
+} */
+
 /* html, body{
   width: 100%;
   height: 100%;

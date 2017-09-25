@@ -35,9 +35,10 @@ exports.postTrack = (req, res) => {
         meal.save((error) => {
           if (error) {
             logger.log(error);
+            res.status(500).send('Something broke!');
           } else {
             // res.render('track', { isAuthenticated: true, user, title: 'Pet Meal Tracker' });
-            res.json({ message: 'Meal added' });
+            res.json({ message: 'Meal added', meal });
           }
         });
       }
