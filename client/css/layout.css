@@ -1,3 +1,4 @@
+/* track page */
 input[type="datetime-local"] {
   border-color: rgb(219, 219, 219);
   padding: 5 9;
@@ -8,9 +9,12 @@ input[type="datetime-local"] {
 }
 
 input[type="checkbox"] {
-  /* font-size: 16px; */
   margin-top: 10px;
-  /* padding: 5px; */
+}
+
+/* meals table */
+.pagination a {
+  outline: none;
 }
 
 

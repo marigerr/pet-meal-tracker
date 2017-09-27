@@ -146,99 +146,102 @@ export default class Track extends React.Component {
       <div>
         {this.state.foodtypesOptions &&
           <div>
-            <h2 className='title'>Track</h2>
+            <section className="section is-dark">
 
-            <form onSubmit={this.handleSubmit}>
-              {/* <input type="text" name="id" value={this.state.id} className="input is-hidden" onChange={this.handleChange} />
+              <h2 className='title'>Track</h2>
+
+              <form onSubmit={this.handleSubmit} >
+                {/* <input type="text" name="id" value={this.state.id} className="input is-hidden" onChange={this.handleChange} />
               <input type="text" name="packageDailyEquivalent" value={this.state.packageDailyEquivalent} className="input is-hidden" onChange={this.handleChange} /> */}
-              <div className="field is-horizontal">
-                <div className="field-label is-normal">
-                  <label className="label">Select Food Type</label>
-                </div>
-                <div className="field-body">
-                  <div className="field">
-                    <div className="control">
-                      <div className="select">
-                        <select name="brandId" value={this.state.brandId} onChange={this.handleChange}>
-                          {this.state.foodtypesOptions}
-                        </select>
+                <div className="field is-horizontal">
+                  <div className="field-label is-normal">
+                    <label className="label">Select Food Type</label>
+                  </div>
+                  <div className="field-body">
+                    <div className="field">
+                      <div className="control">
+                        <div className="select">
+                          <select name="brandId" value={this.state.brandId} onChange={this.handleChange}>
+                            {this.state.foodtypesOptions}
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="field is-horizontal">
-                <div className="field-label is-normal">
-                  <label className="label">Package Portion</label>
-                </div>
-                <div className="field-body">
-                  <div className="field">
-                    <div className="control">
-                      <div className="select">
-                        <select name="amount" value={this.state.amount} onChange={this.handleChange}>
-                          <option value="0.10">.10</option>
-                          <option value="0.20">.20</option>
-                          <option value="0.25">.25</option>
-                          <option value="0.30">.30</option>
-                          <option value="0.40">.40</option>
-                          <option value="0.50">.50</option>
-                          <option value="0.60">.60</option>
-                          <option value="0.70">.70</option>
-                          <option value="0.75">.75</option>
-                          <option value="0.80">.80</option>
-                          <option value="0.90">.90</option>
-                          <option value="1">1</option>
-                        </select>
+                <div className="field is-horizontal">
+                  <div className="field-label is-normal">
+                    <label className="label">Package Portion</label>
+                  </div>
+                  <div className="field-body">
+                    <div className="field">
+                      <div className="control">
+                        <div className="select">
+                          <select name="amount" value={this.state.amount} onChange={this.handleChange}>
+                            <option value="0.10">.10</option>
+                            <option value="0.20">.20</option>
+                            <option value="0.25">.25</option>
+                            <option value="0.30">.30</option>
+                            <option value="0.40">.40</option>
+                            <option value="0.50">.50</option>
+                            <option value="0.60">.60</option>
+                            <option value="0.70">.70</option>
+                            <option value="0.75">.75</option>
+                            <option value="0.80">.80</option>
+                            <option value="0.90">.90</option>
+                            <option value="1">1</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="field is-horizontal">
-                <div className="field-label is-normal">
-                  <label className="label">Time</label>
-                </div>
-                <div className="field-body">
-                  <div className="field">
-                    <div className="control">
-                      <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange} />
+                <div className="field is-horizontal">
+                  <div className="field-label is-normal">
+                    <label className="label">Time</label>
+                  </div>
+                  <div className="field-body">
+                    <div className="field">
+                      <div className="control">
+                        <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="field is-horizontal">
-                <div className="field-label is-normal">
-                  <label className="label checkbox is-normal">Opened New Package</label>
-                </div>
-                <div className="field-body">
-                  <div className="field">
-                    <div className="control">
-                      {/* <label className="checkbox is-normal"> */}
-                      <input className="is-normal" name="openednewpackage" type="checkbox" value={this.state.openednewpackage} onChange={this.handleChange} />
-                      {/* </label> */}
+                <div className="field is-horizontal">
+                  <div className="field-label is-normal">
+                    <label className="label checkbox is-normal">Opened New Package</label>
+                  </div>
+                  <div className="field-body">
+                    <div className="field">
+                      <div className="control">
+                        {/* <label className="checkbox is-normal"> */}
+                        <input className="is-normal" name="openednewpackage" type="checkbox" value={this.state.openednewpackage} onChange={this.handleChange} />
+                        {/* </label> */}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="field is-horizontal">
-                <div className="field-label">
-                </div>
-                <div className="field-body">
-                  <div className="field">
-                    <div className="control">
-                      <input className='button is-success' type="submit" value="Submit" />
+                <div className="field is-horizontal">
+                  <div className="field-label">
+                  </div>
+                  <div className="field-body">
+                    <div className="field">
+                      <div className="control">
+                        <input className='button is-success' type="submit" value="Submit" />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-            </form >
+              </form >
 
-            {this.feedbackMessage()}
+              {this.feedbackMessage()}
 
+            </section>
           </div >
         }
       </div >

@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import ReactPaginate from 'react-paginate';
 import Track from './Track.jsx';
+import MealTable from './MealTable.jsx';
 
 export default class Meals extends React.Component {
   constructor(props) {
@@ -11,122 +13,80 @@ export default class Meals extends React.Component {
       editName: '',
       editAmount: '',
       editId: '',
+      data: [],
+      offset: 0,
+      perPage: 8,
     };
   }
   componentDidMount() {
     document.title = 'Tracker - Meals';
+    this.loadMealsFromServer();
+  }
+
+  getPaginatedItems(items) {
+    return items.slice(this.state.offset, this.state.offset + this.state.perPage);
+  }
+
+  loadMealsFromServer() {
     axios.get('http://localhost:3000/api/meals').then((result) => {
       console.log(result);
       if (result.data.message === 'unauthorized') {
         console.log('you need to log in');
         window.location.href = 'http://localhost:3000/api/auth';
       } else {
-        const mealList = result.data.map(meal =>
-          <tr key={meal._id}>
-            <td>{meal.brand}</td>
-            <td>{meal.packageportion}</td>
-            <td>{Math.round(meal.percentDailyValue * 100)}%</td>
-            <td>{new Date(meal.timestamp).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })}</td>
-            <td>
-              <button id={meal._id} className='button is-danger is-small' onClick={this.deleteMeal.bind(this)}>Delete</button>
-              {/* <button id={meal._id} data-name={meal.name} data-amount={meal.packageportion} className='button is-warning is-small' onClick={this.showEditModal.bind(this)}>Edit</button> */}
-            </td>
-          </tr>);
         this.setState({
-          mealList,
+          wholeDataset: result.data,
         });
+        const currentData = this.getPaginatedItems(result.data);
+        this.setState({
+          data: currentData,
+          pageCount: Math.ceil(result.data.length / this.state.perPage),
+        }, () => console.log(this.state));
       }
     });
   }
 
-  deleteMeal(event) {
-    console.log(event.target.id);
-    axios.delete('http://localhost:3000/api/meals', {
-      data: { _id: event.target.id },
-    }).then((result) => {
-      console.log(result.data.mealId);
-      console.log(this.state.mealList);
-      const newMealList = this.state.mealList.filter(row => row.key !== result.data.mealId);
+  handlePageClick(data) {
+    console.log(this.state);
+    const selected = data.selected;
+    const offset = Math.ceil(selected * this.state.perPage);
+
+    this.setState({
+      offset,
+    }, () => {
+      console.log(this.state);
+      const currentData = this.getPaginatedItems(this.state.wholeDataset);
       this.setState({
-        mealList: newMealList,
+        data: currentData,
       });
     });
   }
-
-  showEditModal(event) {
-    console.log(event.target.id);
-    console.log(event.target.dataset.name);
-    this.setState({
-      modalClassNames: 'modal is-active',
-      editName: event.target.dataset.name,
-      editAmount: event.target.dataset.amount,
-      editId: event.target.id,
-    }, () => {
-      console.log(this.state);
-    });
-  }
-
-  closeEditModal() {
-    this.setState({
-      modalClassNames: 'modal',
-    });
-  }
-
-  // editMeal(event) {
-  // console.log(event.target.id);
-  // axios.put('http://localhost:3000/api/meals', {
-  //   data: { _id: event.target.id },
-  // }).then((result) => {
-  //   console.log(result.data.mealId);
-  //   console.log(this.state.mealList);
-  //   const newMealList = this.state.mealList.filter(row => row.key !== result.data.mealId);
-  //   this.setState({
-  //     mealList: newMealList,
-  //   });
-  // });
-  // }
 
   render() {
     return (
       <div>
 
-        {/* <div className={this.state.modalClassNames}>
-          <div className="modal-background"></div>
-          <div className="modal-card">
-            <header className="modal-card-head">
-              <p className="modal-card-title">Edit Meal</p>
-              <button className="delete" aria-label="close" onClick={this.closeEditModal.bind(this)}></button>
-            </header>
-            <section className="modal-card-body">
-              <Track
-                name={this.state.editName}
-                amount={this.state.editAmount}
-                id={this.state.editId}
-              />
-            </section>
-            <footer className="modal-card-foot">
-              <button className="button is-success">Save changes</button>
-              <button className="button">Cancel</button>
-            </footer>
-          </div>
-        </div> */}
-
-
-        {this.state.mealList &&
+        {this.state.data &&
           <div>
             <h2 className='title'>Meals</h2>
-            <table className="table is-striped is-bordered">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Package Portion</th>
-                  <th>Daily Percent</th>
-                  <th>Time</th>
-                  <th>Change</th>
-                </tr>
-              </thead>
-              <tbody>{this.state.mealList}</tbody>
-            </table>
+            <MealTable data={this.state.data} />
+            <nav className="pagination" role="navigation" aria-label="pagination">
+              <ReactPaginate previousLabel={'previous'}
+                nextLabel={'next'}
+                breakLabel={<a href="">...</a>}
+                breakClassName={'break-me'}
+                pageCount={this.state.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.handlePageClick.bind(this)}
+                containerClassName={'pagination-list'}
+                subContainerClassName={'pages pagination'}
+                activeClassName={'is-current'}
+                previousClassName={'pagination-previous'}
+                nextClassName={'pagination-next'}
+                pageLinkClassName={'pagination-link'}
+              />
+            </nav>
           </div>
         }
       </div>
