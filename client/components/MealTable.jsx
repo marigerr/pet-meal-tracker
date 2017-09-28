@@ -55,14 +55,14 @@ export default class MealTable extends React.Component {
 
   render() {
     return (
-      <table className="table is-striped is-bordered">
+      <table className="table is-striped">
         <thead>
           <tr>
             <th>Name</th>
             <th>Package Portion</th>
             <th>Daily Percent</th>
             <th>Time</th>
-            <th>Change</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>{this.state.mealTableRows}</tbody>

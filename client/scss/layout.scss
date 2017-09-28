@@ -1,3 +1,26 @@
+@import "~bulma/sass/utilities/initial-variables";
+
+$primary: #23d160;
+$danger: rgba(186, 16, 81, 0.49);
+// $primary: hsl(210, 27%, 88%);
+
+
+
+@import "~bulma/sass/utilities/_all";
+@import "~bulma/sass/utilities/controls";
+// @import "~bulma/sass/base/generic";
+@import "~bulma/sass/base/_all";
+@import "~bulma/sass/grid/columns";
+@import "~bulma/sass/elements/button";
+@import "~bulma/sass/components/nav";
+@import "~bulma/sass/components/navbar";
+@import "~bulma/sass/components/pagination";
+@import "~bulma/sass/components/message";
+@import "~bulma/sass/layout/section";
+@import "~bulma/sass/elements/form";
+@import "~bulma/sass/elements/table";
+@import "~bulma/sass/elements/title";
+
 /* track page */
 input[type="datetime-local"] {
   border-color: rgb(219, 219, 219);
@@ -16,6 +39,12 @@ input[type="checkbox"] {
 .pagination a {
   outline: none;
 }
+
+
+/* add food page */
+/* #addFoodTableTitle {
+  margin-bottom: 57px;
+} */
 
 
 /* @keyframes exit-message {

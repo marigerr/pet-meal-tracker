@@ -7,7 +7,7 @@ import Track from './Track.jsx';
 import Addfood from './Addfood.jsx';
 import Account from './Account.jsx';
 import Github from './Github.jsx';
-import '../css/layout.css';
+import '../scss/layout.scss';
 
 export default class App extends React.Component {
   constructor(props) {

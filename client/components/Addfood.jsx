@@ -20,8 +20,8 @@ export default class Addfood extends React.Component {
     const newRow = array.map(food =>
       <tr key={food._id}>
         <td>{food.brand}</td>
-        <td>{food.volume}</td>
-        <td>{food.packageDailyEquivalent}</td>
+        <td>{food.volume} g</td>
+        <td>{Math.round(food.packageDailyEquivalent * 100)}</td>
         <td>
           <button id={food._id} className='button is-danger is-small' onClick={this.deleteFood.bind(this)}>Delete</button>
           {/* <button id={food._id} data-brand={food.brand} data-amount={food.packageportion} className='button is-warning is-small' onClick={this.showEditModal.bind(this)}>Edit</button> */}
@@ -89,9 +89,9 @@ export default class Addfood extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1 className="title">Add New Food </h1>
+      <div className="columns">
         <div className="column is-half">
+          <h1 className="title">Add New Food </h1>
           <form onSubmit={this.handleSubmit}>
             <div className="field">
               <label id="brand" className="label">Name/Brand/Flavor</label>
@@ -116,15 +116,15 @@ export default class Addfood extends React.Component {
         </div>
 
         {this.state.foodTable &&
-          <div>
-            <h2 className='title'>Food</h2>
-            <table className="table is-striped is-bordered">
+          <div className="column is-half">
+            <h1 id="addFoodTableTitle" className='title'>Entered Food</h1>
+            <table className="table is-striped">
               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Volume</th>
                   <th>% of Daily Requirement</th>
-                  <th>Change</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>{this.state.foodTable}</tbody>
